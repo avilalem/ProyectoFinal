@@ -22,5 +22,8 @@ class Receta:
     def agregar_ingrediente(self,nombre:str, cantidad:float, unidad:str):
         ing=Ingrediente(nombre, cantidad, unidad)
         self.ingredientes.append(ing)
-    def guardar(self, ):
+    def guardar(self) -> int:
+        receta_id=self.db.execute("""
+        INSERT INTO ingredientes(receta_id, nombre, categoria, instrucciones) VALUES(?,?,?)
+        """, (self.nombre, self.categoria, self.instrucciones))
 
