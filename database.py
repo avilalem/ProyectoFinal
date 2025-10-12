@@ -28,7 +28,7 @@ class SQLiteDatabase(IDatabaseConnection):
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         nombre TEXT NOT NULL, 
         categoria TEXT CHECK(categoria IN('DULCE', 'SALADO')),
-        instrucciones TEXT""")
+        instrucciones TEXT)""")
 
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS ingredientes(
@@ -37,21 +37,30 @@ class SQLiteDatabase(IDatabaseConnection):
         nombre TEXT NOT NULL, 
         cantidad REAL, 
         unidad TEXT NOT NULL, 
-        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE
+        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE)
         """)
         self.connection.commit()
     def execute(self, query, params=()):
-        cursor:Cursor=self.connection.cursor()
-        cursor.execute(query, params)
-        self.connection.commit()
-        return cursor.lastrowid
+        try:
+            cursor:Cursor=self.connection.cursor()
+            cursor.execute(query, params)
+            self.connection.commit()
+            return cursor.lastrowid
+        except sql.Error as e:
+            raise Exception(f"Error al ejecutar la consulta: {e}")
     def fetchall(self, query, params=()):
-        cursor: Cursor = self.connection.cursor()
-        cursor.execute(query, params)
-        self.connection.commit()
-        return cursor.lastrowid
+        try:
+            cursor: Cursor = self.connection.cursor()
+            cursor.execute(query, params)
+            return cursor.fetchall()
+        except sql.Error as e:
+            raise Exception(f"Error al ejecutar la consulta: {e}")
     def close(self):
-        if self.connection:
-            self.connection.close()
+        try:
+            if self.connection:
+                self.connection.close()
+                return True
+        except sql.Error as e:
+            return False
 
 
