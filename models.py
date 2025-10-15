@@ -23,20 +23,27 @@ class Receta:
         ing=Ingrediente(nombre, cantidad, unidad)
         self.ingredientes.append(ing)
     def guardar(self) -> int:
-        receta_id=self.db.execute("""
-        INSERT INTO recetas( nombre, categoria, instrucciones) VALUES(?,?,?)
-        """, (self.nombre, self.categoria, self.instrucciones))
-        if receta_id is None:
-            raise Exception("No se pudo insertar la receta en la base de datos")
-        for ing in self.ingredientes:
-            self.db.execute("""
-            INSERT INTO ingredientes (receta_id, nombre, cantidad, unidad) VALUES(?,?,?,?)""",
-                            ing.to_tuple(receta_id))
-        self.id=receta_id
-        return receta_id
+        try:
+            if self.categoria not in ("DULCE", "SALADO"):
+                raise ValueError("La categoría debe ser 'DULCE' o 'SALADO'")
+
+            receta_id=self.db.execute("""
+            INSERT INTO recetas( nombre, categoria, instrucciones) VALUES(?,?,?)
+            """, (self.nombre, self.categoria, self.instrucciones))
+            if receta_id is None:
+                raise Exception("No se pudo insertar la receta en la base de datos")
+            for ing in self.ingredientes:
+                self.db.execute("""
+                INSERT INTO ingredientes (receta_id, nombre, cantidad, unidad) VALUES(?,?,?,?)""",
+                                ing.to_tuple(receta_id))
+            self.id=receta_id
+            return receta_id
+        except Exception as e:
+            raise Exception(f"No fue posible guardar la receta, error: {e}")
     @staticmethod
     def obtener_todas(db:SQLiteDatabase):
         rows=db.fetchall("SELECT id, nombre, categoria FROM recetas ORDER BY nombre")
+        return rows
 
     @staticmethod
     def obtener_por_id(db: SQLiteDatabase, receta_id: int):
