@@ -23,6 +23,8 @@ class SQLiteDatabase(IDatabaseConnection):
         self.connection=sql.connect(self.db_name)
     def _create_tables(self):
         cursor=self.connection.cursor()
+        if not self.connection:
+            raise Exception("No hay conexión activa con la base de datos.")
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS recetas (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -43,6 +45,9 @@ class SQLiteDatabase(IDatabaseConnection):
     def execute(self, query, params=()):
         try:
             cursor:Cursor=self.connection.cursor()
+            if not self.connection:
+                raise Exception("No hay conexión activa con la base de datos.")
+
             cursor.execute(query, params)
             self.connection.commit()
             return cursor.lastrowid
@@ -51,6 +56,9 @@ class SQLiteDatabase(IDatabaseConnection):
     def fetchall(self, query, params=()):
         try:
             cursor: Cursor = self.connection.cursor()
+            if not self.connection:
+                raise Exception("No hay conexión activa con la base de datos.")
+
             cursor.execute(query, params)
             return cursor.fetchall()
         except sql.Error as e:
@@ -59,10 +67,14 @@ class SQLiteDatabase(IDatabaseConnection):
     def fetchone(self, query, params=()):
         try:
             cursor: Cursor = self.connection.cursor()
+            if not self.connection:
+                raise Exception("No hay conexión activa con la base de datos.")
+
             cursor.execute(query, params)
             return cursor.fetchone()
         except sql.Error as e:
             raise Exception(f"Error al ejecutar la consulta: {e}")
+
 
     def close(self):
         try:

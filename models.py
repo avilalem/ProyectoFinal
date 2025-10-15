@@ -38,6 +38,38 @@ class Receta:
     def obtener_todas(db:SQLiteDatabase):
         rows=db.fetchall("SELECT id, nombre, categoria FROM recetas ORDER BY nombre")
 
+    @staticmethod
+    def obtener_por_id(db: SQLiteDatabase, receta_id: int):
+        receta_data = db.fetchone("SELECT id, nombre, categoria, instrucciones FROM recetas WHERE id = ?", (receta_id,))
+        if not receta_data:
+            return None
+
+        receta = Receta(db, receta_data[1], receta_data[2], receta_data[3])
+        receta.id = receta_data[0]
+
+        ingredientes_data = db.fetchall("SELECT nombre, cantidad, unidad FROM ingredientes WHERE receta_id = ?",
+                                        (receta_id,))
+        for nombre, cantidad, unidad in ingredientes_data:
+            receta.agregar_ingrediente(nombre, cantidad, unidad)
+
+        return receta
+
+    def actualizar(self):
+        if not self.id:
+            raise Exception("No se puede actualizar una receta que no existe en la base de datos")
+
+        self.db.execute("""
+            UPDATE recetas
+            SET nombre = ?, categoria = ?, instrucciones = ?
+            WHERE id = ?
+        """, (self.nombre, self.categoria, self.instrucciones, self.id))
+
+    def eliminar(self):
+        if not self.id:
+            raise Exception("No se puede eliminar una receta sin ID asignado")
+        self.db.execute("DELETE FROM recetas WHERE id = ?", (self.id,))
+
+
 
 
 
