@@ -55,6 +55,15 @@ class SQLiteDatabase(IDatabaseConnection):
             return cursor.fetchall()
         except sql.Error as e:
             raise Exception(f"Error al ejecutar la consulta: {e}")
+
+    def fetchone(self, query, params=()):
+        try:
+            cursor: Cursor = self.connection.cursor()
+            cursor.execute(query, params)
+            return cursor.fetchone()
+        except sql.Error as e:
+            raise Exception(f"Error al ejecutar la consulta: {e}")
+
     def close(self):
         try:
             if self.connection:
