@@ -34,8 +34,7 @@ class SQLiteDatabase(IDatabaseConnection):
 
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS ingredientes(
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        receta_id INTEGER NOT NULL, 
+        id INTEGER PRIMARY KEY AUTOINCREMENT,  
         nombre TEXT NOT NULL,  
         unidad TEXT NOT NULL 
         )""")
