@@ -36,11 +36,17 @@ class SQLiteDatabase(IDatabaseConnection):
         CREATE TABLE IF NOT EXISTS ingredientes(
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         receta_id INTEGER NOT NULL, 
-        nombre TEXT NOT NULL, 
-        cantidad REAL, 
-        unidad TEXT NOT NULL, 
-        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE)
-        """)
+        nombre TEXT NOT NULL,  
+        unidad TEXT NOT NULL 
+        )""")
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS detalle_receta
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        cantidad FLOAT,
+        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE
+        FOREIGN KEY(ingrediente_id) REFERENCES ingredientes(id) ON DELETE CASCADE
+        )""")
         self.connection.commit()
     def execute(self, query, params=()):
         try:
@@ -63,6 +69,7 @@ class SQLiteDatabase(IDatabaseConnection):
             return cursor.fetchall()
         except sql.Error as e:
             raise Exception(f"Error al ejecutar la consulta: {e}")
+
 
     def fetchone(self, query, params=()):
         try:
