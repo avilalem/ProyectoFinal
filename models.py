@@ -2,14 +2,13 @@ from typing import List, Optional
 from database import SQLiteDatabase
 
 class Ingrediente:
-    def __init__(self, nombre:str, cantidad:float=0.0, unidad: str=""):
+    def __init__(self, nombre:str, unidad: str=""):
         self.nombre=nombre
-        self.cantidad=cantidad
         self.unidad=unidad
     def to_tuple(self, receta_id:int):
-        return(receta_id, self.nombre, self.cantidad,self.unidad)
+        return(receta_id, self.nombre,self.unidad)
     def mostrar_ingrediente(self):
-        return f"Ingrediente(nombre={self.nombre!r}, cantidad={self.cantidad}, unidad={self.unidad!r})"
+        return f"Ingrediente(nombre={self.nombre!r}, unidad={self.unidad!r})"
 class Receta:
     def __init__(self, db:SQLiteDatabase, nombre:str, categoria:str, instrucciones:str=""):
         self.db=db
@@ -19,8 +18,8 @@ class Receta:
         self.instrucciones=instrucciones
         self.ingredientes:List[Ingrediente]=[]
 
-    def agregar_ingrediente(self,nombre:str, cantidad:float, unidad:str):
-        ing=Ingrediente(nombre, cantidad, unidad)
+    def agregar_ingrediente(self,nombre:str,unidad:str):
+        ing=Ingrediente(nombre, unidad)
         self.ingredientes.append(ing)
     def guardar(self) -> int:
         try:
@@ -75,6 +74,11 @@ class Receta:
         if not self.id:
             raise Exception("No se puede eliminar una receta sin ID asignado")
         self.db.execute("DELETE FROM recetas WHERE id = ?", (self.id,))
+class DetalleReceta:
+    def __init__(self, cantidad:float=0.0):
+        self.cantidad=cantidad
+    def agregar_cantidad(self):
+        pass
 
 
 
