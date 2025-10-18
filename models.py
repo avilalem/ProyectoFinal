@@ -6,7 +6,7 @@ class Ingrediente:
         self.nombre=nombre
         self.unidad=unidad
     def to_tuple(self, receta_id:int):
-        return(receta_id, self.nombre,self.unidad)
+        return receta_id, self.nombre,self.unidad
     def mostrar_ingrediente(self):
         return f"Ingrediente(nombre={self.nombre!r}, unidad={self.unidad!r})"
 class Receta:
