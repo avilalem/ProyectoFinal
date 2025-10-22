@@ -40,7 +40,7 @@ class SQLiteDatabase(IDatabaseConnection):
         )""")
 
         cursor.execute("""
-        CREATE TABLE IF NOT EXISTS detalle_receta
+        CREATE TABLE IF NOT EXISTS detalle_receta(
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         cantidad FLOAT,
         FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE
