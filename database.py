@@ -47,7 +47,7 @@ class SQLiteDatabase(IDatabaseConnection):
         UNIQUE(receta_id, ingrediente_id),
         FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE,
         FOREIGN KEY(ingrediente_id) REFERENCES ingredientes(id) ON DELETE CASCADE
-        )""")
+         )""")
         self.connection.commit()
     def execute(self, query, params=()):
         try:
