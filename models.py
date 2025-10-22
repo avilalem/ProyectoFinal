@@ -35,21 +35,31 @@ class Receta:
     def agregar_ingrediente(self, ingrediente: Ingrediente, cantidad: float):
         if cantidad <= 0:
             raise ValueError("La cantidad debe ser mayor que 0.")
+
+        for ing, _ in self.ingredientes:
+            if ing.nombre.lower() == ingrediente.nombre.lower():
+                raise ValueError(f"El ingrediente '{ingrediente.nombre}' ya fue agregado a la receta.")
+
         self.ingredientes.append((ingrediente, cantidad))
 
     def guardar(self):
-        self.id = self.db.execute("""
-            INSERT INTO recetas (nombre, categoria, instrucciones)
-            VALUES (?, ?, ?)
-        """, (self.nombre, self.categoria, self.instrucciones))
-
-        for ingrediente, cantidad in self.ingredientes:
-            ing_id = ingrediente.guardar()
-            self.db.execute("""
-                INSERT INTO detalle_receta (receta_id, ingrediente_id, cantidad)
+        try:
+            self.id = self.db.execute("""
+                INSERT INTO recetas (nombre, categoria, instrucciones)
                 VALUES (?, ?, ?)
-            """, (self.id, ing_id, cantidad))
-        return self.id
+            """, (self.nombre, self.categoria, self.instrucciones))
+
+            for ingrediente, cantidad in self.ingredientes:
+                ing_id = ingrediente.guardar()
+                self.db.execute("""
+                    INSERT INTO detalle_receta (receta_id, ingrediente_id, cantidad)
+                    VALUES (?, ?, ?)
+                """, (self.id, ing_id, cantidad))
+            return self.id
+
+        except Exception as e:
+            print(f"Error al guardar la receta: {e}")
+            return None
 
     @staticmethod
     def obtener_todas(db: SQLiteDatabase):

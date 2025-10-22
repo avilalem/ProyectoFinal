@@ -39,11 +39,13 @@ class SQLiteDatabase(IDatabaseConnection):
         unidad TEXT NOT NULL 
         )""")
 
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS detalle_receta(
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        cantidad FLOAT,
-        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE
+        cursor.execute("""CREATE TABLE IF NOT EXISTS detalle_receta (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        receta_id INTEGER NOT NULL,
+        ingrediente_id INTEGER NOT NULL,
+        cantidad FLOAT NOT NULL CHECK (cantidad > 0),
+        UNIQUE(receta_id, ingrediente_id),
+        FOREIGN KEY(receta_id) REFERENCES recetas(id) ON DELETE CASCADE,
         FOREIGN KEY(ingrediente_id) REFERENCES ingredientes(id) ON DELETE CASCADE
         )""")
         self.connection.commit()
