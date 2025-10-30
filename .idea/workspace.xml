@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="26168205-6bbc-4723-a375-33aa50c5759b" name="Changes" comment="Version1.11" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;beto9915&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/avilalem/ProyectoFinal.git&quot;,
+    &quot;accountId&quot;: &quot;0d96eafe-34bd-418e-a0ca-531aedcd5ae6&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="33l6Rx2HBHg0hMhrzDvaVketuSW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "settings.editor.selected.configurable": "preferences.general"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
+    ]
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d9fa9deec7cb-d902c0275401-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.23892.515" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26168205-6bbc-4723-a375-33aa50c5759b" name="Changes" comment="" />
+      <created>1759879311061</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759879311061</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Version1">
+      <option name="closed" value="true" />
+      <created>1759889347254</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759889347254</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Version1">
+      <option name="closed" value="true" />
+      <created>1759890377249</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759890377249</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Version1.1">
+      <option name="closed" value="true" />
+      <created>1760229526010</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1760229526010</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Version1.2">
+      <option name="closed" value="true" />
+      <created>1760231832244</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760231832244</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Version1.2">
+      <option name="closed" value="true" />
+      <created>1760239294306</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760239294306</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Version1.3">
+      <option name="closed" value="true" />
+      <created>1760241448956</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760241448956</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Version1.4">
+      <option name="closed" value="true" />
+      <created>1760491024230</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760491024230</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Version1.5">
+      <option name="closed" value="true" />
+      <created>1760492345356</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1760492345356</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Version1.6">
+      <option name="closed" value="true" />
+      <created>1760493116449</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1760493116449</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Version1.6">
+      <option name="closed" value="true" />
+      <created>1760577459502</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1760577459502</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Version1.7">
+      <option name="closed" value="true" />
+      <created>1760577650629</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1760577650629</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Version1.8">
+      <option name="closed" value="true" />
+      <created>1760756976293</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1760756976293</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Version1.8">
+      <option name="closed" value="true" />
+      <created>1760757009395</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1760757009395</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Version1.8">
+      <option name="closed" value="true" />
+      <created>1761095068354</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1761095068354</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Version1.9">
+      <option name="closed" value="true" />
+      <created>1761095530674</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1761095530674</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Version1.9">
+      <option name="closed" value="true" />
+      <created>1761096124756</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1761096124756</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Version1.9">
+      <option name="closed" value="true" />
+      <created>1761442362942</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1761442362942</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Version1.10">
+      <option name="closed" value="true" />
+      <created>1761782588112</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761782588112</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Version1.11">
+      <option name="closed" value="true" />
+      <created>1761783214432</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1761783214432</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Version1" />
+    <MESSAGE value="Version1.1" />
+    <MESSAGE value="Version1.2" />
+    <MESSAGE value="Version1.3" />
+    <MESSAGE value="Version1.4" />
+    <MESSAGE value="Version1.5" />
+    <MESSAGE value="Version1.6" />
+    <MESSAGE value="Version1.7" />
+    <MESSAGE value="Version1.8" />
+    <MESSAGE value="Version1.9" />
+    <MESSAGE value="Version1.10" />
+    <MESSAGE value="Version1.11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version1.11" />
+  </component>
+</project>
