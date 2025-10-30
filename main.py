@@ -16,4 +16,14 @@ class PaginaPrincipal(QMainWindow):
         pass
     def abrir_admin(self):
         password, ok=QInputDialog(self, "Acceso administrador", "Ingrese la contraseña:")
-        pass
+        if ok:
+            if password=="1234":
+               pass
+            else:
+                QMessageBox.warning(self, "Accesso denegado", "Contraseña incorrecta")
+
+if __name__=="__main__":
+    app=QApplication(sys.argv)
+    window=PaginaPrincipal()
+    window.show()
+    sys.exit(app.exec())
