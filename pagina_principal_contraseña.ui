@@ -661,7 +661,7 @@ QPushButton:pressed {
            <string>Contraseña</string>
           </property>
          </widget>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QLineEdit" name="linePassword">
           <property name="geometry">
            <rect>
             <x>280</x>
@@ -669,6 +669,9 @@ QPushButton:pressed {
             <width>221</width>
             <height>41</height>
            </rect>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
           </property>
          </widget>
         </widget>
