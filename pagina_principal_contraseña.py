@@ -16,6 +16,7 @@ class PaginaPassword(QMainWindow):
         self.botonIngresar.clicked.connect(self.verificar_contrasena)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal_contraseña"))
+        self.botonRegresar.clicked.connect(self.regresar_a_principal)
 
     def confirmar_salida(self):
         dlg = ConfirmDialog(
@@ -25,6 +26,11 @@ class PaginaPassword(QMainWindow):
             on_confirm=lambda: QApplication.quit()
         )
         dlg.exec()
+
+    def regresar_a_principal(self):
+        self.ventana_principal = PaginaPrincipal()
+        self.ventana_principal.show()
+        self.close()
 
     def verificar_contrasena(self):
         contrasena_ingresada = self.textContrasena.text()
@@ -41,7 +47,8 @@ class PaginaPassword(QMainWindow):
         msg = (
             "Esta es la ventana de Ingreso.\n\n"
             "Desde aquí puedes ingresar la contraseña para acceder a las funciones del administrador. "
-            "Haz clic en 'Ingresar' para comenzar."
+            "Ingresa la contraseña y haz clic en 'Ingresar' para comenzar."
+            "Si no tienes una contraseña o la tuya no sirve, envia un correo a am.amendez@udeo.edu.gt"
         )
-        dlg = MessageDialog(self, title="Ayuda - Página Principal", text=msg, editable=False)
+        dlg = MessageDialog(self, title="Ayuda - Ingreso Administrador", text=msg, editable=False)
         dlg.exec()

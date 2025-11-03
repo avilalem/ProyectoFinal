@@ -18,8 +18,13 @@ class PaginaLista(QMainWindow):
         self.botonTodo.toggled.connect(self.filtrar_recetas)
         self.mostrar_recetas(self.recetas)
         self.botonSalir.toggled.connect(self.confirmar_salida)
-        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal"))
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
+        self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
 
+    def regresar_a_busqueda(self):
+        self.ventana_busqueda = PaginaBusqueda()
+        self.ventana_busqueda.show()
+        self.close()
 
     def confirmar_salida(self):
         dlg = ConfirmDialog(

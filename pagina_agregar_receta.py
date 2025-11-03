@@ -16,7 +16,7 @@ class PaginaAgregarReceta(QMainWindow):
         ###
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
-        self.botonRegresar.clicked.connect(self.regresar)
+        self.botonRegresar.clicked.connect(self.regresar_a_receta)
 
     def confirmar_salida(self):
         dlg = ConfirmDialog(
@@ -74,8 +74,8 @@ class PaginaAgregarReceta(QMainWindow):
         self.textIngredientes.clear()
         self.textProcedimiento.clear()
 
-    def regresar(self):
-        from windows.pagina_receta import PaginaReceta
-        self.nueva_ventana = PaginaReceta(receta_id=None)  # puedes ajustar según flujo
-        self.nueva_ventana.show()
+    def regresar_a_receta(self):
+        self.ventana_receta = PaginaReceta()
+        self.ventana_receta.show()
         self.close()
+

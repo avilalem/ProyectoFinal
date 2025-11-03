@@ -31,7 +31,8 @@ class PaginaEditarReceta(QMainWindow):
             self,
             title="Salir de la aplicación",
             text="¿Estás seguro de que deseas salir?",
-            on_confirm=lambda: QApplication.quit();
+            on_confirm=lambda: QApplication.quit()
+        )
 
     def cargar_datos(self):
         self.lineCategoria.setText(self.receta.categoria)

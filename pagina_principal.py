@@ -17,6 +17,7 @@ class PaginaPrincipal(QMainWindow):
         self.botonAdmin.clicked.connect(self.abrir_admin)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal"))
 
+
     def confirmar_salida(self):
         dlg = ConfirmDialog(
             self,

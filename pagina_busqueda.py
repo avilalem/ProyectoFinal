@@ -17,7 +17,8 @@ class PaginaBusqueda(QMainWindow):
         self.recetas = self.db.obtener_todas_recetas()
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
-        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal"))
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
+        self.botonRegresar.clicked.connect(self.regresar_a_principal)
 
 
 
@@ -29,6 +30,11 @@ class PaginaBusqueda(QMainWindow):
             on_confirm=lambda: QApplication.quit()
         )
         dlg.exec()
+
+    def regresar_a_principal(self):
+        self.ventana_principal = PaginaPrincipal()
+        self.ventana_principal.show()
+        self.close()
 
     def buscar_recetas(self):
         texto = self.cajaBusqueda.text().strip().lower()
