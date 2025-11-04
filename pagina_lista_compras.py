@@ -1,0 +1,100 @@
+import sys
+from PyQt6 import uic
+from PyQt6.QtWidgets import QMainWindow, QApplication, QListWidgetItem
+from message_dialog import MessageDialog
+from database import SQLiteDatabase
+
+
+class PaginaListaCompras(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("ui/pagina_lista_compras.ui", self)
+
+        self.db = SQLiteDatabase()
+        self.ingredientes_lista = {}  # {nombre: cantidad_total}
+
+        self.borrarTodo.clicked.connect(self.borrar_lista)
+        self.guardarLista.clicked.connect(self.guardar_lista)
+        self.selectTodo.clicked.connect(self.marcar_todo)
+        self.cargar_lista_compras()
+        self.botonSalir.clicked.connect(self.confirmar_salida)
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista_compras"))
+        self.botonRegresar.clicked.connect(self.regresar_a_receta)
+
+
+    def confirmar_salida(self):
+        dlg = ConfirmDialog(
+            self,
+            title="Salir de la aplicación",
+            text="¿Estás seguro de que deseas salir?",
+            on_confirm=lambda: QApplication.quit()
+        )
+        dlg.exec()
+
+    def regresar_a_receta(self):
+        self.ventana_receta = PaginaReceta()
+        self.ventana_receta.show()
+        self.close()
+
+    def cargar_lista_compras(self):
+        self.listaCompras.clear()
+        self.ingredientes_lista.clear()
+
+        ingredientes = self.db.fetchall("""
+            SELECT i.nombre, SUM(ri.cantidad) as total, i.unidad
+            FROM receta_ingrediente ri
+            JOIN ingredientes i ON i.id = ri.id_ingrediente
+            GROUP BY i.nombre, i.unidad
+        """)
+
+        for nombre, total, unidad in ingredientes:
+            self.ingredientes_lista[nombre] = (total, unidad)
+
+        for nombre, (total, unidad) in self.ingredientes_lista.items():
+            item_text = f"{nombre}: {total:.2f} {unidad}"
+            item = QListWidgetItem(item_text)
+            item.setCheckState(False)  # no marcado
+            self.listaCompras.addItem(item)
+
+    def marcar_todo(self):
+        marcar = all(
+            self.listaCompras.item(i).checkState() == 0
+            for i in range(self.listaCompras.count())
+        )
+        for i in range(self.listaCompras.count()):
+            self.listaCompras.item(i).setCheckState(2 if marcar else 0)
+
+    def borrar_lista(self):
+        dlg = MessageDialog(
+            self,
+            title="Borrar lista",
+            text="¿Deseas borrar toda la lista de compras?",
+            editable=False
+        )
+        dlg.exec()
+        self.listaCompras.clear()
+        self.ingredientes_lista.clear()
+
+    def guardar_lista(self):
+
+        for i in range(self.listaCompras.count()):
+            item = self.listaCompras.item(i)
+            nombre = item.text().split(":")[0].strip()
+            marcado = item.checkState() == 2
+            self.db.execute(
+                "INSERT OR REPLACE INTO lista_compras (nombre, completado) VALUES (?, ?)",
+                (nombre, int(marcado))
+            )
+
+        MessageDialog(self, title="Lista guardada", text="La lista se ha guardado correctamente.").exec()
+
+    def open_info(self, page_key):
+        msg = (
+            "Esta es la lista de Compras.\n\n"
+            "Desde aquí puedes descargar una lista con los ingredientes que necesitas. "
+            "Puedes desmarcar los ingredientes que NO necesites."
+        )
+        dlg = MessageDialog(self, title="Ayuda - Lista de Compras", text=msg, editable=False)
+        dlg.exec()
+
+
