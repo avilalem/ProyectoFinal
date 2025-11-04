@@ -1,15 +1,13 @@
-#import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from message_dialog import MessageDialog
-from database import SQLiteDatabase
-from models import Receta, Ingrediente
+from PyQt6.QtWidgets import QMainWindow
+from pagina_principal_contraseña import PaginaPassword
+from pagina_busqueda import PaginaBusqueda
 
 
 class PaginaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/pagina_principal.ui", self)
+        uic.loadUi("pagina_principal.ui", self)
         self.db = SQLiteDatabase()
 
         self.botonSalir.clicked.connect(self.confirmar_salida)

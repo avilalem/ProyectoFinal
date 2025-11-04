@@ -1,9 +1,6 @@
 import sys
-from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from message_dialog import MessageDialog   # importa la clase que creamos
-from database import SQLiteDatabase
-from models import Receta, Ingrediente
+from PyQt6.QtWidgets import QApplication
+from pagina_principal import PaginaPrincipal
 
 class AppController:
     def __init__(self):
