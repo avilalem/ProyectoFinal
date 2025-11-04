@@ -15,8 +15,3 @@ class AppController:
         self.ventana_actual = ventana
         ventana.show()
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = PaginaPrincipal()
-    window.show()
-    sys.exit(app.exec())
