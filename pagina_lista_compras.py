@@ -7,7 +7,7 @@ from database import SQLiteDatabase
 class PaginaListaCompras(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
-        uic.loadUi("ui/pagina_lista_compras.ui", self)
+        uic.loadUi("pagina_lista_compras.ui", self)
 
         self.db = SQLiteDatabase()
         self.ingredientes_lista = {}  # {nombre: cantidad_total}
@@ -32,9 +32,9 @@ class PaginaListaCompras(QMainWindow):
         dlg.exec()
 
     def regresar_a_receta(self):
+        print("Regresando")
         from pagina_receta import PaginaReceta
-        ventana_receta=PaginaReceta(self.controlador)
-        self.controlador.mostrar(ventana_receta)
+        self.nav.mostrar("Receta", PaginaReceta, self.controlador)
 
     def cargar_lista_compras(self):
         self.listaCompras.clear()

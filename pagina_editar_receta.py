@@ -3,11 +3,12 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from database import SQLiteDatabase
 from models import Receta
+from navigation import NavigationManager
 
 class PaginaEditarReceta(QMainWindow):
     def __init__(self, controlador, receta_id):
         super().__init__()
-        uic.loadUi("ui/pagina_agregar_receta.ui", self)
+        uic.loadUi("pagina_editar_receta.ui", self)
 
         self.db = SQLiteDatabase()
         self.receta_id = receta_id
@@ -59,8 +60,8 @@ class PaginaEditarReceta(QMainWindow):
         self.close()
 
     def volver(self):
+        print("Regresando")
         from pagina_receta import PaginaReceta
-        ventana = PaginaReceta(self.controlador, receta_id=self.receta_id)
-        self.controlador.mostrar(ventana)
+        self.nav.mostrar("receta", PaginaReceta, self.controlador)
 
 

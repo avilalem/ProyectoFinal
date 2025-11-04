@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from models import Receta
-from navigation import NavigationManager  # AÑADIDO
+from navigation import NavigationManager
 
 
 class PaginaBusqueda(QMainWindow):
@@ -21,7 +21,7 @@ class PaginaBusqueda(QMainWindow):
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
-        self.botonRegresar.clicked.connect(self.nav.volver_atras)  # MODIFICADO
+        self.botonRegresar.clicked.connect(self.nav.volver_atras)
 
 
     def confirmar_salida(self):

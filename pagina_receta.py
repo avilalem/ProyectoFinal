@@ -2,6 +2,7 @@ import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox
 from database import SQLiteDatabase
+from navigation import NavigationManager
 from models import Receta, Ingrediente
 
 
@@ -10,6 +11,7 @@ class PaginaReceta(QMainWindow):
         super().__init__()
         uic.loadUi("pagina_receta.ui", self)
         self.db = SQLiteDatabase()
+        self.nav = NavigationManager.get_instance()
         self.receta_id = receta_id
         self.controlador=controlador
         self.receta = self.db.cargar_receta_con_ingredientes(self.receta_id)
@@ -82,9 +84,9 @@ class PaginaReceta(QMainWindow):
         self.controlador.mostrar(ventana_busqueda)
 
     def abrir_agregar_receta(self):
-        from pagina_agregar_receta import PaginaAgregarReceta
-        ventana_agregar=PaginaAgregarReceta
-        self.controlador.mostrar(ventana_agregar)
+        print("Regresando")
+        from pagina_busqueda import PaginaBusqueda
+        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
     def open_info(self, page_key: str):
         from message_dialog import MessageDialog

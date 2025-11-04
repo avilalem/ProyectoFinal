@@ -3,7 +3,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication
 from database import SQLiteDatabase
 from models import Receta
-
+from navigation import NavigationManager
 class PaginaAgregarReceta(QMainWindow):
 
     def __init__(self, controlador):
@@ -79,7 +79,7 @@ class PaginaAgregarReceta(QMainWindow):
         self.textProcedimiento.clear()
 
     def regresar_a_receta(self):
+        print("Regresando")
         from pagina_receta import PaginaReceta
-        ventana_receta = PaginaReceta(self.controlador)
-        self.controlador.mostrar(ventana_receta)
+        self.nav.mostrar("receta", PaginaReceta, self.controlador)
 

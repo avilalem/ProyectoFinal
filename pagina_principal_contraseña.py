@@ -2,7 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QLineEdit
 from message_dialog import MessageDialog
 from database import SQLiteDatabase
-from navigation import NavigationManager  # AÑADIDO
+from navigation import NavigationManager
 
 
 class PaginaPassword(QMainWindow):
@@ -11,7 +11,7 @@ class PaginaPassword(QMainWindow):
         uic.loadUi("pagina_principal_contraseña.ui", self)
         self.db = SQLiteDatabase()
         self.controlador = controlador
-        self.nav = NavigationManager.get_instance()  # AÑADIDO
+        self.nav = NavigationManager.get_instance()
         self.linePassword.setEchoMode(QLineEdit.EchoMode.Password)
         self.botonIngresar.clicked.connect(self.verificar_contrasena)
         self.botonSalir.clicked.connect(self.confirmar_salida)
@@ -39,9 +39,9 @@ class PaginaPassword(QMainWindow):
         dlg.exec()
 
     def regresar_a_principal(self):
+        print("Regresando")
         from pagina_principal import PaginaPrincipal
-        ventana_principal = PaginaPrincipal(self.controlador)
-        self.controlador.mostrar(ventana_principal)
+        self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
 
     def open_info(self, page_key):

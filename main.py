@@ -20,10 +20,8 @@ class AppController:
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    # Inicializar navegación
     nav = NavigationManager.get_instance()
 
-    # Crear y mostrar ventana principal
     controlador = AppController()
     window = PaginaPrincipal(controlador)
     nav.ventanas["principal"] = window
