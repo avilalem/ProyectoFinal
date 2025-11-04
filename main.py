@@ -1,17 +1,16 @@
 import sys
-from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from message_dialog import MessageDialog   # importa la clase que creamos
+from PyQt6.QtWidgets import QApplication
 from database import SQLiteDatabase
-from models import Receta, Ingrediente
+from windows.pagina_principal import PaginaPrincipal
 
-class AppController:
-    def __init__(self):
-        self.ventana_actual = None
 
-    def mostrar(self, ventana):
-        if self.ventana_actual:
-            self.ventana_actual.close()
-        self.ventana_actual = ventana
-        ventana.show()
+def main():
+    app = QApplication(sys.argv)
+    db = SQLiteDatabase()
+    ventana = PaginaPrincipal()
+    ventana.show()
+    sys.exit(app.exec())
 
+
+if __name__ == "__main__":
+    main()
