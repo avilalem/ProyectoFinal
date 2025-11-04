@@ -1,7 +1,6 @@
 import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QListWidgetItem
-from message_dialog import MessageDialog
 from database import SQLiteDatabase
 
 
@@ -23,6 +22,7 @@ class PaginaListaCompras(QMainWindow):
 
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -32,6 +32,7 @@ class PaginaListaCompras(QMainWindow):
         dlg.exec()
 
     def regresar_a_receta(self):
+        from pagina_receta import PaginaReceta
         self.ventana_receta = PaginaReceta()
         self.ventana_receta.show()
         self.close()
@@ -65,6 +66,7 @@ class PaginaListaCompras(QMainWindow):
             self.listaCompras.item(i).setCheckState(2 if marcar else 0)
 
     def borrar_lista(self):
+        from message_dialog import MessageDialog
         dlg = MessageDialog(
             self,
             title="Borrar lista",
@@ -76,7 +78,7 @@ class PaginaListaCompras(QMainWindow):
         self.ingredientes_lista.clear()
 
     def guardar_lista(self):
-
+        from message_dialog import MessageDialog
         for i in range(self.listaCompras.count()):
             item = self.listaCompras.item(i)
             nombre = item.text().split(":")[0].strip()
@@ -89,6 +91,7 @@ class PaginaListaCompras(QMainWindow):
         MessageDialog(self, title="Lista guardada", text="La lista se ha guardado correctamente.").exec()
 
     def open_info(self, page_key):
+        from message_dialog import MessageDialog
         msg = (
             "Esta es la lista de Compras.\n\n"
             "Desde aquí puedes descargar una lista con los ingredientes que necesitas. "

@@ -1,12 +1,11 @@
 import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow
-from message_dialog import MessageDialog
+from PyQt6.QtWidgets import QMainWindow, QApplication
 from database import SQLiteDatabase
 from models import Receta
 
-
 class PaginaAgregarReceta(QMainWindow):
+
     def __init__(self):
         super().__init__()
         uic.loadUi("ui/pagina_agregar_receta.ui", self)
@@ -19,6 +18,7 @@ class PaginaAgregarReceta(QMainWindow):
         self.botonRegresar.clicked.connect(self.regresar_a_receta)
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -26,6 +26,7 @@ class PaginaAgregarReceta(QMainWindow):
             on_confirm=lambda: QApplication.quit()
         )
     def confirmar_guardar(self):
+        from message_dialog import MessageDialog
         msg = (
             "¿Deseas guardar esta receta?\n\n"
             "Si confirmas, los datos ingresados se guardarán en la base de datos."
@@ -35,6 +36,7 @@ class PaginaAgregarReceta(QMainWindow):
             self.guardar_receta()
 
     def confirmar_eliminar(self):
+        from message_dialog import MessageDialog
         msg = (
             "¿Deseas eliminar todos los datos ingresados?\n\n"
             "Esta acción borrará todo lo que has escrito."
@@ -44,6 +46,7 @@ class PaginaAgregarReceta(QMainWindow):
             self.limpiar_campos()
 
     def guardar_receta(self):
+        from message_dialog import MessageDialog
         categoria = self.lineCategoria.text().strip()
         nombre = self.lineNombre.text().strip()
         unidad = self.spinUnidad.text()  # valor del spinbox
@@ -75,6 +78,7 @@ class PaginaAgregarReceta(QMainWindow):
         self.textProcedimiento.clear()
 
     def regresar_a_receta(self):
+        from pagina_receta import PaginaReceta
         self.ventana_receta = PaginaReceta()
         self.ventana_receta.show()
         self.close()

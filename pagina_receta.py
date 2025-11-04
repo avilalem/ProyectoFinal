@@ -1,9 +1,8 @@
 import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox
-from message_dialog import MessageDialog
 from database import SQLiteDatabase
-from models import Receta, Ingrediente, IngredienteEnReceta
+from models import Receta, Ingrediente
 
 
 class PaginaReceta(QMainWindow):
@@ -31,6 +30,7 @@ class PaginaReceta(QMainWindow):
         self.infoMetric.clicked.connect(lambda : self.open_info("receta_metricas"))
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -85,12 +85,13 @@ class PaginaReceta(QMainWindow):
         self.close()
 
     def abrir_agregar_receta(self):
-        from windows.pagina_agregar_receta import PaginaAgregarReceta
+        from pagina_agregar_receta import PaginaAgregarReceta
         self.nueva_ventana = PaginaAgregarReceta()
         self.nueva_ventana.show()
         self.close()
 
     def open_info(self, page_key: str):
+        from message_dialog import MessageDialog
         if page_key == "receta_general":
             msg = (
                 "Esta es la página de detalles de la receta.\n\n"

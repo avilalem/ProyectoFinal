@@ -1,7 +1,10 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QApplication
 from pagina_principal_contraseña import PaginaPassword
 from pagina_busqueda import PaginaBusqueda
+from message_dialog import MessageDialog
+
+
 from database import SQLiteDatabase
 
 
@@ -18,6 +21,7 @@ class PaginaPrincipal(QMainWindow):
 
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -27,13 +31,13 @@ class PaginaPrincipal(QMainWindow):
         dlg.exec()
 
     def abrir_usuario(self):
-        from windows.pagina_busqueda import PaginaBusqueda
+        from pagina_busqueda import PaginaBusqueda
         self.ventana_busqueda = PaginaBusqueda()
         self.ventana_busqueda.show()
         self.close()
 
     def abrir_admin(self):
-        from windows.pagina_principal_contrasenna import PaginaPassword
+        from pagina_principal_contraseña import PaginaPassword
         self.ventana_admin = PaginaPassword()
         self.ventana_admin.show()
         self.close()

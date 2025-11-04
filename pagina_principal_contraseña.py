@@ -1,9 +1,7 @@
-#import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QApplication, QLineEdit
 from message_dialog import MessageDialog
 from database import SQLiteDatabase
-from models import Receta, Ingrediente
 
 
 class PaginaPassword(QMainWindow):
@@ -19,6 +17,7 @@ class PaginaPassword(QMainWindow):
         self.botonRegresar.clicked.connect(self.regresar_a_principal)
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -28,18 +27,20 @@ class PaginaPassword(QMainWindow):
         dlg.exec()
 
     def regresar_a_principal(self):
+        from pagina_principal import PaginaPrincipal
         self.ventana_principal = PaginaPrincipal()
         self.ventana_principal.show()
         self.close()
 
     def verificar_contrasena(self):
+        from pagina_busqueda import PaginaBusqueda
         contrasena_ingresada = self.textContrasena.text()
 
-        # Ejemplo: validación simple
         if contrasena_ingresada == "1234":
             print("Contraseña correcta. Abriendo panel de administración...")
-            # Aquí puedes abrir otra ventana, por ejemplo:
-            # self.abrir_panel_admin()
+            self.ventana_busqueda = PaginaBusqueda()
+            self.ventana_busqueda.show()
+            self.close()
         else:
             print("Contraseña incorrecta.")
 

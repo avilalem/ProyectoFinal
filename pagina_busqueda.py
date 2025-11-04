@@ -1,8 +1,9 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from models import Receta
+
 
 
 class PaginaBusqueda(QMainWindow):
@@ -23,6 +24,7 @@ class PaginaBusqueda(QMainWindow):
 
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -32,6 +34,7 @@ class PaginaBusqueda(QMainWindow):
         dlg.exec()
 
     def regresar_a_principal(self):
+        from pagina_principal import PaginaPrincipal
         self.ventana_principal = PaginaPrincipal()
         self.ventana_principal.show()
         self.close()
@@ -62,10 +65,12 @@ class PaginaBusqueda(QMainWindow):
         self.textEdit.setPlainText(receta.procedimiento)
 
     def abrir_pagina_lista(self):
+        from pagina_lista import PaginaLista
         self.pagina_lista = PaginaLista()
         self.pagina_lista.show()
         self.close()
     def open_info(self, page_key):
+        from message_dialog import MessageDialog
         msg = (
             "Esta es la ventana de Busqueda.\n\n"
             "Desde aquí puedes ingresar una palabra clave del titulo de la Receta. "

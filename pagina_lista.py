@@ -1,9 +1,7 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
-from models import Receta
-
 
 class PaginaLista(QMainWindow):
     def __init__(self):
@@ -22,11 +20,13 @@ class PaginaLista(QMainWindow):
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
 
     def regresar_a_busqueda(self):
+        from pagina_busqueda import PaginaBusqueda
         self.ventana_busqueda = PaginaBusqueda()
         self.ventana_busqueda.show()
         self.close()
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -51,6 +51,7 @@ class PaginaLista(QMainWindow):
             item.setData(Qt.ItemDataRole.UserRole, receta)
             self.listaRecetas.addItem(item)
     def open_info(self, page_key):
+        from message_dialog import MessageDialog
         msg = (
             "Esta es la lista de Recetas.\n\n"
             "Desde aquí puedes aplicar un filtro para ver recetas, o verlas todas. "

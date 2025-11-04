@@ -1,10 +1,8 @@
 import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication
-from message_dialog import MessageDialog
 from database import SQLiteDatabase
 from models import Receta
-
 
 class PaginaEditarReceta(QMainWindow):
     def __init__(self, receta_id):
@@ -27,6 +25,7 @@ class PaginaEditarReceta(QMainWindow):
             self.cargar_datos()
 
     def confirmar_salida(self):
+        from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
             title="Salir de la aplicación",
@@ -41,6 +40,7 @@ class PaginaEditarReceta(QMainWindow):
         self.textProcedimiento.setPlainText(self.receta.procedimiento)
 
     def guardar_cambios(self):
+        from message_dialog import MessageDialog
         self.receta.nombre = self.lineNombre.text().strip()
         self.receta.categoria = self.lineCategoria.text().strip()
         self.receta.procedimiento = self.textProcedimiento.toPlainText().strip()
@@ -52,12 +52,13 @@ class PaginaEditarReceta(QMainWindow):
         MessageDialog(self, title="Guardado", text="Los cambios se han guardado correctamente.").exec()
 
     def eliminar_receta(self):
+        from message_dialog import MessageDialog
         self.receta.eliminar()
         MessageDialog(self, title="Eliminada", text="La receta ha sido eliminada exitosamente.").exec()
         self.close()
 
     def volver(self):
-        from windows.pagina_receta import PaginaReceta
+        from pagina_receta import PaginaReceta
         self.ventana_receta = PaginaReceta(self.receta_id)
         self.ventana_receta.show()
         self.close()
