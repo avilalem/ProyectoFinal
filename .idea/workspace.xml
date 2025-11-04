@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26168205-6bbc-4723-a375-33aa50c5759b" name="Changes" comment="" />
+    <list default="true" id="26168205-6bbc-4723-a375-33aa50c5759b" name="Changes" comment="Version 1.12" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -230,7 +230,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761783214432</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Version 1.12">
+      <option name="closed" value="true" />
+      <created>1762214607563</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762214607563</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,6 +265,7 @@
     <MESSAGE value="Version1.9" />
     <MESSAGE value="Version1.10" />
     <MESSAGE value="Version1.11" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version1.11" />
+    <MESSAGE value="Version 1.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1.12" />
   </component>
 </project>
