@@ -3,15 +3,17 @@ from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from models import Receta
-
+from navigation import NavigationManager  # AÑADIDO
 
 
 class PaginaBusqueda(QMainWindow):
-    def __init__(self):
+    def __init__(self, controlador):
         super().__init__()
         uic.loadUi("ui/pagina_busqueda.ui", self)
 
         self.db = SQLiteDatabase()
+        self.controlador = controlador
+        self.nav = NavigationManager.get_instance()  # AÑADIDO
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
         self.resultadosLista.itemClicked.connect(self.mostrar_receta)
         self.botonSalir.clicked.connect(self.confirmar_salida)
@@ -19,8 +21,7 @@ class PaginaBusqueda(QMainWindow):
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
-        self.botonRegresar.clicked.connect(self.regresar_a_principal)
-
+        self.botonRegresar.clicked.connect(self.nav.volver_atras)  # MODIFICADO
 
 
     def confirmar_salida(self):
@@ -35,9 +36,7 @@ class PaginaBusqueda(QMainWindow):
 
     def regresar_a_principal(self):
         from pagina_principal import PaginaPrincipal
-        self.ventana_principal = PaginaPrincipal()
-        self.ventana_principal.show()
-        self.close()
+        self.nav.mostrar("principal",PaginaPrincipal)
 
     def buscar_recetas(self):
         texto = self.cajaBusqueda.text().strip().lower()
@@ -66,9 +65,9 @@ class PaginaBusqueda(QMainWindow):
 
     def abrir_pagina_lista(self):
         from pagina_lista import PaginaLista
-        self.pagina_lista = PaginaLista()
-        self.pagina_lista.show()
-        self.close()
+        pagina_lista = PaginaLista(self.controlador)
+        self.controlador.mostrar(pagina_lista)
+
     def open_info(self, page_key):
         from message_dialog import MessageDialog
         msg = (

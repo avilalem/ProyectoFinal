@@ -5,14 +5,14 @@ from database import SQLiteDatabase
 from models import Receta
 
 class PaginaEditarReceta(QMainWindow):
-    def __init__(self, receta_id):
+    def __init__(self, controlador, receta_id):
         super().__init__()
         uic.loadUi("ui/pagina_agregar_receta.ui", self)
 
         self.db = SQLiteDatabase()
         self.receta_id = receta_id
         self.receta = Receta.obtener_por_id(self.db, receta_id)
-
+        self.controlador = controlador
         self.botonGuardar.setText("Guardar cambios")
         self.botonEliminar.setText("Eliminar receta")
 
@@ -32,6 +32,7 @@ class PaginaEditarReceta(QMainWindow):
             text="¿Estás seguro de que deseas salir?",
             on_confirm=lambda: QApplication.quit()
         )
+        dlg.exec()
 
     def cargar_datos(self):
         self.lineCategoria.setText(self.receta.categoria)
@@ -59,8 +60,7 @@ class PaginaEditarReceta(QMainWindow):
 
     def volver(self):
         from pagina_receta import PaginaReceta
-        self.ventana_receta = PaginaReceta(self.receta_id)
-        self.ventana_receta.show()
-        self.close()
+        ventana = PaginaReceta(self.controlador, receta_id=self.receta_id)
+        self.controlador.mostrar(ventana)
 
 

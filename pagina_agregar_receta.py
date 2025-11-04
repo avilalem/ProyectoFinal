@@ -6,13 +6,13 @@ from models import Receta
 
 class PaginaAgregarReceta(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, controlador):
         super().__init__()
         uic.loadUi("ui/pagina_agregar_receta.ui", self)
 
         self.db = SQLiteDatabase()
         self.botonSalir.clicked.connect(self.confirmar_salida)
-        ###
+        self.controlador = controlador
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar_a_receta)
@@ -25,6 +25,7 @@ class PaginaAgregarReceta(QMainWindow):
             text="¿Estás seguro de que deseas salir?",
             on_confirm=lambda: QApplication.quit()
         )
+        dlg.exec()
     def confirmar_guardar(self):
         from message_dialog import MessageDialog
         msg = (
@@ -79,7 +80,6 @@ class PaginaAgregarReceta(QMainWindow):
 
     def regresar_a_receta(self):
         from pagina_receta import PaginaReceta
-        self.ventana_receta = PaginaReceta()
-        self.ventana_receta.show()
-        self.close()
+        ventana_receta = PaginaReceta(self.controlador)
+        self.controlador.mostrar(ventana_receta)
 

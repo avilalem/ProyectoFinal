@@ -4,13 +4,13 @@ from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 
 class PaginaLista(QMainWindow):
-    def __init__(self):
+    def __init__(self, controlador):
         super().__init__()
         uic.loadUi("ui/pagina_lista.ui", self)
 
         self.db = SQLiteDatabase()
         self.recetas = self.db.obtener_todas_recetas()
-
+        self.controlador = controlador
         self.botonDulce.toggled.connect(self.filtrar_recetas)
         self.botonSalado.toggled.connect(self.filtrar_recetas)
         self.botonTodo.toggled.connect(self.filtrar_recetas)
@@ -21,9 +21,8 @@ class PaginaLista(QMainWindow):
 
     def regresar_a_busqueda(self):
         from pagina_busqueda import PaginaBusqueda
-        self.ventana_busqueda = PaginaBusqueda()
-        self.ventana_busqueda.show()
-        self.close()
+        ventana_busqueda = PaginaBusqueda(self.controlador)
+        self.controlador.mostrar(ventana_busqueda)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog

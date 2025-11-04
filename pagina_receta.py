@@ -6,12 +6,12 @@ from models import Receta, Ingrediente
 
 
 class PaginaReceta(QMainWindow):
-    def __init__(self, receta_id: int):
+    def __init__(self, controlador,receta_id: int):
         super().__init__()
         uic.loadUi("pagina_receta.ui", self)
         self.db = SQLiteDatabase()
         self.receta_id = receta_id
-
+        self.controlador=controlador
         self.receta = self.db.cargar_receta_con_ingredientes(self.receta_id)
         self.Titulo.setText(self.receta.nombre)
         self.textProcedimiento.setPlainText(self.receta.procedimiento)
@@ -58,15 +58,13 @@ class PaginaReceta(QMainWindow):
 
     def abrir_editar(self):
         from pagina_editar_receta import PaginaEditarReceta
-        self.ventana_editar = PaginaEditarReceta(self.receta_id)
-        self.ventana_editar.show()
-        self.close()
+        ventana_editar=PaginaEditarReceta(self.controlador)
+        self.controlador.mostrar(ventana_editar)
 
     def abrir_lista_compras(self):
         from pagina_lista_compras import PaginaListaCompras
-        self.ventana_lista = PaginaListaCompras(self.receta_id)
-        self.ventana_lista.show()
-        self.close()
+        ventana_compras=PaginaListaCompras(self.controlador)
+        self.controlador.mostrar(ventana_compras)
 
     def confirmar_eliminar(self):
         msg = QMessageBox(self)
@@ -80,15 +78,13 @@ class PaginaReceta(QMainWindow):
 
     def regresar(self):
         from pagina_busqueda import PaginaBusqueda
-        self.ventana_busqueda = PaginaBusqueda()
-        self.ventana_busqueda.show()
-        self.close()
+        ventana_busqueda=PaginaBusqueda(self.controlador)
+        self.controlador.mostrar(ventana_busqueda)
 
     def abrir_agregar_receta(self):
         from pagina_agregar_receta import PaginaAgregarReceta
-        self.nueva_ventana = PaginaAgregarReceta()
-        self.nueva_ventana.show()
-        self.close()
+        ventana_agregar=PaginaAgregarReceta
+        self.controlador.mostrar(ventana_agregar)
 
     def open_info(self, page_key: str):
         from message_dialog import MessageDialog
