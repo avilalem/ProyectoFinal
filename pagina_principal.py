@@ -2,6 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow
 from pagina_principal_contraseña import PaginaPassword
 from pagina_busqueda import PaginaBusqueda
+from database import SQLiteDatabase
 
 
 class PaginaPrincipal(QMainWindow):
