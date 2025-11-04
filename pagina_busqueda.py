@@ -13,7 +13,7 @@ class PaginaBusqueda(QMainWindow):
 
         self.db = SQLiteDatabase()
         self.controlador = controlador
-        self.nav = NavigationManager.get_instance()  # AÑADIDO
+        self.nav = NavigationManager.get_instance()
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
         self.resultadosLista.itemClicked.connect(self.mostrar_receta)
         self.botonSalir.clicked.connect(self.confirmar_salida)
@@ -64,6 +64,7 @@ class PaginaBusqueda(QMainWindow):
         self.textEdit.setPlainText(receta.procedimiento)
 
     def abrir_pagina_lista(self):
+        print("Siguiente Pagina")
         from pagina_lista import PaginaLista
         self.nav.mostrar("lista", PaginaLista, self.controlador)
 

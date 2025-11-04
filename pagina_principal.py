@@ -11,7 +11,7 @@ class PaginaPrincipal(QMainWindow):
         uic.loadUi("pagina_principal.ui", self)
         self.db = SQLiteDatabase()
         self.controlador = controlador
-        self.nav = NavigationManager.get_instance()  # AÑADIDO
+        self.nav = NavigationManager.get_instance()
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonStart.clicked.connect(self.abrir_usuario)
         self.botonAdmin.clicked.connect(self.abrir_admin)
