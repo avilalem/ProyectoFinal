@@ -2,7 +2,7 @@ import sqlite3 as sql
 from sqlite3 import Connection, Cursor
 
 
-class IDatabaseConnection():
+class IDatabaseConnection:
     def connect(self):
         raise NotImplementedError
     def execute(self, query:str, params:tuple=()):
@@ -89,11 +89,5 @@ class SQLiteDatabase(IDatabaseConnection):
             if self.connection:
                 self.connection.close()
                 return True
-        except sql.Error as e:
+        except sql.Error:
             return False
-
-
-
-
-
-
