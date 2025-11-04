@@ -9,7 +9,7 @@ from navigation import NavigationManager  # AÑADIDO
 class PaginaBusqueda(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
-        uic.loadUi("ui/pagina_busqueda.ui", self)
+        uic.loadUi("pagina_busqueda.ui", self)
 
         self.db = SQLiteDatabase()
         self.controlador = controlador
@@ -65,8 +65,7 @@ class PaginaBusqueda(QMainWindow):
 
     def abrir_pagina_lista(self):
         from pagina_lista import PaginaLista
-        pagina_lista = PaginaLista(self.controlador)
-        self.controlador.mostrar(pagina_lista)
+        self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def open_info(self, page_key):
         from message_dialog import MessageDialog

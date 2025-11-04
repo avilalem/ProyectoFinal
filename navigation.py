@@ -13,6 +13,7 @@ class NavigationManager:
         return cls._instance
 
     def mostrar(self, clave_ventana, ventana_class, *args, **kwargs):
+        print(f"Navegando a: {clave_ventana}")
         if self.ventana_actual:
             ventana_actual_key = self._obtener_clave_ventana(self.ventana_actual)
             if ventana_actual_key:
@@ -22,7 +23,10 @@ class NavigationManager:
             self.ventana_actual.hide()
 
         if clave_ventana not in self.ventanas:
+            print(f"Creando instancia de {ventana_class.__name__}")
             self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
+        else:
+            print(f"Reutilizando instancia existente de {ventana_class.__name__}")
 
         self.ventana_actual = self.ventanas[clave_ventana]
         self.ventana_actual.show()

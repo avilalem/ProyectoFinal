@@ -8,7 +8,7 @@ from navigation import NavigationManager  # AÑADIDO
 class PaginaPassword(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
-        uic.loadUi("ui/pagina_principal_contraseña.ui", self)
+        uic.loadUi("pagina_principal_contraseña.ui", self)
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()  # AÑADIDO

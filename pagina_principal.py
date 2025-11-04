@@ -19,10 +19,12 @@ class PaginaPrincipal(QMainWindow):
 
 
     def abrir_usuario(self):
+        print("Usuario presionado")
         from pagina_busqueda import PaginaBusqueda
         self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)  # MODIFICADO
 
     def abrir_admin(self):
+        print("Administrador presionado")
         from pagina_principal_contraseña import PaginaPassword
         self.nav.mostrar("admin", PaginaPassword, self.controlador)  # MODIFICADO
 
