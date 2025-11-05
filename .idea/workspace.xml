@@ -24,7 +24,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -136,7 +135,31 @@
       <option name="project" value="LOCAL" />
       <updated>1762385237862</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Version 2.3">
+      <option name="closed" value="true" />
+      <created>1762385383133</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1762385383133</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Version 2.3">
+      <option name="closed" value="true" />
+      <created>1762385482966</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1762385482966</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Version 2.3">
+      <option name="closed" value="true" />
+      <created>1762385602193</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762385602193</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
