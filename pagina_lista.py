@@ -10,7 +10,7 @@ class PaginaLista(QMainWindow):
         uic.loadUi("pagina_lista.ui", self)
 
         self.db = SQLiteDatabase()
-        self.recetas = Receta.obtener_todas()
+        self.recetas = Receta.obtener_todas(self.db)
         self.controlador = controlador
         self.botonDulce.toggled.connect(self.filtrar_recetas)
         self.botonSalado.toggled.connect(self.filtrar_recetas)
@@ -50,7 +50,7 @@ class PaginaLista(QMainWindow):
         for receta in lista:
             item = QListWidgetItem(receta.nombre)
             item.setData(Qt.ItemDataRole.UserRole, receta)
-        self.listaRecetas.addItem(item)
+            self.listaRecetas.addItem(item)
 
     def open_info(self, page_key):
         from message_dialog import MessageDialog
