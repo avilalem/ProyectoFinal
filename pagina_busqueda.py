@@ -10,7 +10,7 @@ class PaginaBusqueda(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
         uic.loadUi("pagina_busqueda.ui", self)
-
+        print("PaginaBusqueda: UI cargada")
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
