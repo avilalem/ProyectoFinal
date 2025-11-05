@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.0">
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation.py" beforeDir="false" afterPath="$PROJECT_DIR$/navigation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_busqueda.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_busqueda.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_principal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_principal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_principal_contraseña.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_principal_contraseña.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pagina_busqueda.ui" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_busqueda.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,13 +98,13 @@
       <option name="project" value="LOCAL" />
       <updated>1762232008373</updated>
     </task>
-    <task id="LOCAL-00003" summary="3/11 @22:53">
+    <task id="LOCAL-00003" summary="Version 2.1">
       <option name="closed" value="true" />
-      <created>1762232014440</created>
+      <created>1762311761314</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1762232014440</updated>
+      <updated>1762311761314</updated>
     </task>
     <task id="LOCAL-00004" summary="4/11 @07:36">
       <option name="closed" value="true" />
@@ -125,7 +122,7 @@
       <option name="project" value="LOCAL" />
       <updated>1762283697390</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +154,7 @@
     <MESSAGE value="3/11 @22:53" />
     <MESSAGE value="4/11 @07:36" />
     <MESSAGE value="4/11 @13:14" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 2.0" />
+    <MESSAGE value="Version 2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 2.1" />
   </component>
 </project>

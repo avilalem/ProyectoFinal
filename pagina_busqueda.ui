@@ -488,7 +488,7 @@
 }</string>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8,1">
        <property name="spacing">
@@ -523,7 +523,7 @@ border-radius:25px;
 </string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+          <enum>QFrame::Shape::NoFrame</enum>
          </property>
          <widget class="QPushButton" name="botonSalir">
           <property name="geometry">
@@ -604,7 +604,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+          <enum>QFrame::Shape::NoFrame</enum>
          </property>
          <widget class="QLineEdit" name="cajaBusqueda">
           <property name="geometry">
@@ -623,16 +623,6 @@ QPushButton:pressed {
           </property>
           <property name="placeholderText">
            <string>Buscar Recetas...</string>
-          </property>
-         </widget>
-         <widget class="QListView" name="resultadosLista">
-          <property name="geometry">
-           <rect>
-            <x>240</x>
-            <y>220</y>
-            <width>281</width>
-            <height>191</height>
-           </rect>
           </property>
          </widget>
          <widget class="QTextEdit" name="textEdit">
@@ -656,6 +646,16 @@ QPushButton:pressed {
           </property>
           <property name="text">
            <string>Todas las Recetas</string>
+          </property>
+         </widget>
+         <widget class="QListWidget" name="resultadosLista">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>260</y>
+            <width>281</width>
+            <height>192</height>
+           </rect>
           </property>
          </widget>
         </widget>
@@ -690,7 +690,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+          <enum>QFrame::Shape::NoFrame</enum>
          </property>
          <widget class="QPushButton" name="botonInfo">
           <property name="geometry">

@@ -17,7 +17,7 @@ class PaginaBusqueda(QMainWindow):
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
         self.resultadosLista.itemClicked.connect(self.mostrar_receta)
         self.botonSalir.clicked.connect(self.confirmar_salida)
-        self.recetas = self.db.obtener_todas_recetas()
+        self.recetas = Receta.obtener_todas(self.db)
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
