@@ -2,6 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
+from models import Receta, Ingrediente
 
 class PaginaLista(QMainWindow):
     def __init__(self, controlador):
@@ -9,7 +10,7 @@ class PaginaLista(QMainWindow):
         uic.loadUi("pagina_lista.ui", self)
 
         self.db = SQLiteDatabase()
-        self.recetas = self.db.obtener_todas_recetas()
+        self.recetas = Receta.obtener_todas()
         self.controlador = controlador
         self.botonDulce.toggled.connect(self.filtrar_recetas)
         self.botonSalado.toggled.connect(self.filtrar_recetas)
