@@ -479,6 +479,28 @@ border-radius:25px;
             <normaloff>icono-informacion.png</normaloff>icono-informacion.png</iconset>
           </property>
          </widget>
+         <widget class="QPushButton" name="botonCerrarS">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>10</y>
+            <width>241</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Cerrar Sesión</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
