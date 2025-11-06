@@ -19,6 +19,7 @@ class PaginaListaCompras(QMainWindow):
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista_compras"))
         self.botonRegresar.clicked.connect(self.regresar_a_receta)
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
 
 
     def confirmar_salida(self):
@@ -99,4 +100,22 @@ class PaginaListaCompras(QMainWindow):
         dlg = MessageDialog(self, title="Ayuda - Lista de Compras", text=msg, editable=False)
         dlg.exec()
 
+    def cerrar_sesion(self):
+        from navigation import NavigationManager
+        from message_dialog import MessageDialog
+
+        nav = NavigationManager.get_instance()
+        if nav.es_administrador:
+            nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+        else:
+            dlg = MessageDialog(self,
+                                title="Información",
+                                text="No hay sesión de administrador activa",
+                                editable=False)
+            dlg.exec()
 

@@ -8,14 +8,11 @@ class PaginaPrincipal(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
 
-        # Ajusta la ruta si tus .ui están dentro de carpeta 'ui/'
-        # prueba primero con "ui/pagina_principal.ui", si tu .ui está en la raíz usa "pagina_principal.ui"
         uic.loadUi("pagina_principal.ui", self)
 
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-        # Conectar señales
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonStart.clicked.connect(self.abrir_usuario)
         self.botonAdmin.clicked.connect(self.abrir_admin)
@@ -24,7 +21,6 @@ class PaginaPrincipal(QMainWindow):
     def abrir_usuario(self):
         print("PaginaPrincipal: abrir_usuario llamado")
         from pagina_busqueda import PaginaBusqueda
-        # clave 'busqueda' y pasar controlador si lo requiere la página
         self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
     def abrir_admin(self):

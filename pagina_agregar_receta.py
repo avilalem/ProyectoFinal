@@ -16,6 +16,7 @@ class PaginaAgregarReceta(QMainWindow):
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar_a_receta)
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -82,4 +83,23 @@ class PaginaAgregarReceta(QMainWindow):
         print("Regresando")
         from pagina_receta import PaginaReceta
         self.nav.mostrar("receta", PaginaReceta, self.controlador)
+
+    def cerrar_sesion(self):
+        from navigation import NavigationManager
+        from message_dialog import MessageDialog
+
+        nav = NavigationManager.get_instance()
+        if nav.es_administrador:
+            nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+        else:
+            dlg = MessageDialog(self,
+                                title="Información",
+                                text="No hay sesión de administrador activa",
+                                editable=False)
+            dlg.exec()
 

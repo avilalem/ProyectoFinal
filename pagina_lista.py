@@ -19,6 +19,7 @@ class PaginaLista(QMainWindow):
         self.botonSalir.toggled.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
 
     def regresar_a_busqueda(self):
         print("Regresando")
@@ -61,3 +62,22 @@ class PaginaLista(QMainWindow):
         )
         dlg = MessageDialog(self, title="Ayuda - Página Principal", text=msg, editable=False)
         dlg.exec()
+
+    def cerrar_sesion(self):
+        from navigation import NavigationManager
+        from message_dialog import MessageDialog
+
+        nav = NavigationManager.get_instance()
+        if nav.es_administrador:
+            nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+        else:
+            dlg = MessageDialog(self,
+                                title="Información",
+                                text="No hay sesión de administrador activa",
+                                editable=False)
+            dlg.exec()

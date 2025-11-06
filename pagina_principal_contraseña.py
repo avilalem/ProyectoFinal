@@ -8,13 +8,11 @@ from navigation import NavigationManager
 class PaginaPassword(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
-        # Asegúrate de la ruta correcta:
         uic.loadUi("pagina_principal_contraseña.ui", self)
 
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-        # Asegura que el widget exista en el .ui (objectName: linePassword)
         self.linePassword.setEchoMode(QLineEdit.EchoMode.Password)
         self.botonIngresar.clicked.connect(self.verificar_contrasena)
         self.botonSalir.clicked.connect(self.confirmar_salida)
@@ -26,6 +24,7 @@ class PaginaPassword(QMainWindow):
         if contrasena_ingresada == "1234":
             print("PaginaPassword: contraseña correcta")
             from pagina_busqueda import PaginaBusqueda
+            self.nav.login_administrador()
             self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
         else:
             print("PaginaPassword: contraseña incorrecta")
