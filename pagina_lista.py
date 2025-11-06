@@ -20,6 +20,8 @@ class PaginaLista(QMainWindow):
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+        self.actualizar_botones_administrador()
+
 
     def regresar_a_busqueda(self):
         print("Regresando")
@@ -81,3 +83,14 @@ class PaginaLista(QMainWindow):
                                 text="No hay sesión de administrador activa",
                                 editable=False)
             dlg.exec()
+
+    def actualizar_botones_administrador(self):
+        from navigation import NavigationManager
+        nav = NavigationManager.get_instance()
+        es_admin = nav.es_administrador
+        botones_admin = ['botonCerrarS']
+        for boton_name in botones_admin:
+            if hasattr(self, boton_name):
+                getattr(self, boton_name).setVisible(es_admin)
+
+        print(f"Modo administrador: {es_admin}")

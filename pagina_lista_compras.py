@@ -20,7 +20,7 @@ class PaginaListaCompras(QMainWindow):
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista_compras"))
         self.botonRegresar.clicked.connect(self.regresar_a_receta)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
-
+        self.actualizar_botones_administrador()
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -119,3 +119,13 @@ class PaginaListaCompras(QMainWindow):
                                 editable=False)
             dlg.exec()
 
+    def actualizar_botones_administrador(self):
+        from navigation import NavigationManager
+        nav = NavigationManager.get_instance()
+        es_admin = nav.es_administrador
+        botones_admin = ['botonCerrarS']
+        for boton_name in botones_admin:
+            if hasattr(self, boton_name):
+                getattr(self, boton_name).setVisible(es_admin)
+
+        print(f"Modo administrador: {es_admin}")

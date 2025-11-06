@@ -26,7 +26,7 @@ class PaginaReceta(QMainWindow):
         self.lineCantidad.textChanged.connect(self.actualizar_cantidades)
         self.botonRegresar.clicked.connect(self.regresar)
         self.botonAgregarReceta.clicked.connect(self.abrir_agregar_receta)
-
+        self.actualizar_botones_administrador()
         self.botonInfo.clicked.connect(lambda: self.open_info("receta_general"))
         self.infoCantidad.clicked.connect(lambda: self.open_info("receta_cantidad"))
         self.infoMetric.clicked.connect(lambda : self.open_info("receta_metricas"))
@@ -82,6 +82,17 @@ class PaginaReceta(QMainWindow):
         from pagina_busqueda import PaginaBusqueda
         ventana_busqueda=PaginaBusqueda(self.controlador)
         self.controlador.mostrar(ventana_busqueda)
+
+    def actualizar_botones_administrador(self):
+        from navigation import NavigationManager
+        nav = NavigationManager.get_instance()
+        es_admin = nav.es_administrador
+        botones_admin = ['botonEditar', 'botonEliminar', 'botonAgregarReceta', 'botonCerrarS']
+        for boton_name in botones_admin:
+            if hasattr(self, boton_name):
+                getattr(self, boton_name).setVisible(es_admin)
+
+        print(f"Modo administrador: {es_admin}")
 
     def abrir_agregar_receta(self):
         print("Regresando")
