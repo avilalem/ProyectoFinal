@@ -22,6 +22,7 @@ class PaginaListaCompras(QMainWindow):
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.actualizar_botones_administrador()
 
+
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(

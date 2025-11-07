@@ -17,8 +17,12 @@ class PaginaPassword(QMainWindow):
         self.botonIngresar.clicked.connect(self.verificar_contrasena)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal_contraseña"))
-        self.botonRegresar.clicked.connect(self.nav.volver_atras)
+        self.botonRegresar.clicked.connect(self.regresar_a_principal)
 
+    def regresar_a_principal(self):
+        print("Regresando")
+        from pagina_principal import PaginaPrincipal
+        self.nav.mostrar("Receta", PaginaPrincipal, self.controlador)
 
     def verificar_contrasena(self):
         contrasena_ingresada = self.linePassword.text()
