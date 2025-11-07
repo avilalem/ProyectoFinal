@@ -21,7 +21,7 @@ class PaginaBusqueda(QMainWindow):
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
-        self.botonRegresar.clicked.connect(self.nav.volver_atras)
+        self.botonRegresar.clicked.connect(self.regresar_inteligente)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.actualizar_botones_administrador()
 
@@ -35,9 +35,13 @@ class PaginaBusqueda(QMainWindow):
         )
         dlg.exec()
 
-    def regresar_a_principal(self):
-        from pagina_principal import PaginaPrincipal
-        self.nav.mostrar("principal",PaginaPrincipal)
+    def regresar_inteligente(self):
+        if self.nav.es_administrador:
+            from pagina_principal_contraseña import PaginaPassword
+            self.nav.mostrar("admin", PaginaPassword, self.controlador)
+        else:
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
     def buscar_recetas(self):
         texto = self.cajaBusqueda.text().strip().lower()
