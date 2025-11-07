@@ -29,10 +29,10 @@ class PaginaPassword(QMainWindow):
         contrasena_ingresada = self.linePassword.text()
         if contrasena_ingresada == "1234":
             print("PaginaPassword: contraseña correcta")
-            from pagina_busqueda import PaginaBusqueda
+            from pagina_principal_admin import PaginaAdmin
             self.linePassword.clear()
             self.nav.login_administrador()
-            self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
+            self.nav.mostrar("admin", PaginaAdmin, self.controlador)
         else:
             print("PaginaPassword: contraseña incorrecta")
             dlg = MessageDialog(self, title="Error", text="Contraseña incorrecta.", editable=False)
