@@ -21,14 +21,15 @@ class PaginaBusqueda(QMainWindow):
         self.actualizar_lista(self.recetas)
         self.botonTodas.clicked.connect(self.abrir_pagina_lista)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_busqueda"))
-        self.botonRegresar.clicked.connect(self.volver)
+        self.botonRegresar.clicked.connect(self.regresar_a_principal)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.actualizar_botones_administrador()
 
-    def volver(self):
-        print("Regresando")
-        from pagina_principal_contraseña import PaginaPassword
-        self.nav.mostrar("contraseña", PaginaPassword, self.controlador)
+    def regresar_a_principal(self):
+        from pagina_principal import PaginaPrincipal
+        self.linePassword.clear()
+        ventana_principal = PaginaPrincipal(self.controlador)
+        self.controlador.mostrar(ventana_principal)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
