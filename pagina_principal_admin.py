@@ -1,6 +1,5 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QMainWindow, QApplication
 from database import SQLiteDatabase
 from message_dialog import MessageDialog
 from navigation import NavigationManager
@@ -12,13 +11,13 @@ class PaginaAdmin(QMainWindow):
         uic.loadUi("pagina_principal_admin.ui", self)
         self.db = SQLiteDatabase()
         self.controlador = controlador
-        self.nav=NavigationManager.get_instance()
+        self.nav = NavigationManager.get_instance()
 
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.botonAgregar.clicked.connect(self.agregar_receta)
         self.botonVer.clicked.connect(self.ver_receta)
         self.botonBuscar.clicked.connect(self.buscar_receta)
-        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
+        self.botonInfo.clicked.connect(lambda: self.open_info("admin"))
         self.botonSalir.clicked.connect(self.confirmar_salida)
 
     def confirmar_salida(self):
@@ -33,35 +32,31 @@ class PaginaAdmin(QMainWindow):
 
     def open_info(self, page_key):
         msg = (
-            "Esta es la ventana principal.\n\n"
-            "Desde aquí puedes acceder al modo usuario o administrador. "
-            "Haz clic en 'Ingresar' para comenzar."
+            "Panel de Administración\n\n"
+            "Desde aquí puedes:\n"
+            "• Agregar nuevas recetas\n"
+            "• Ver todas las recetas\n"
+            "• Buscar recetas específicas\n"
+            "• Cerrar sesión de administrador"
         )
-        dlg = MessageDialog(self, title="Ayuda - Página Principal", text=msg, editable=False)
+        dlg = MessageDialog(self, title="Ayuda - Panel Admin", text=msg, editable=False)
         dlg.exec()
 
     def agregar_receta(self):
-        print("PaginaPrincipal: agregar_receta llamado")
         from pagina_agregar_receta import PaginaAgregarReceta
-        self.nav.mostrar("agregar receta", PaginaAgregarReceta, self.controlador)
+        self.nav.mostrar("agregar_receta", PaginaAgregarReceta, self.controlador)  # ✅ Sin espacio
 
     def ver_receta(self):
-        print("PaginaReceta: ver_receta llamado")
-        from pagina_receta import PaginaReceta
-        self.nav.mostrar("recetas", PaginaReceta, self.controlador)
+        from pagina_lista import PaginaLista
+        self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def buscar_receta(self):
-        print("PaginaBuscar: buscar_receta llamado")
         from pagina_busqueda import PaginaBusqueda
         self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
     def cerrar_sesion(self):
-        from navigation import NavigationManager
-        from message_dialog import MessageDialog
-
-        nav = NavigationManager.get_instance()
-        if nav.es_administrador:
-            nav.logout_administrador()
+        if self.nav.es_administrador:
+            self.nav.logout_administrador()
             dlg = MessageDialog(self,
                                 title="Sesión Cerrada",
                                 text="Sesión de administrador cerrada correctamente",
@@ -70,10 +65,4 @@ class PaginaAdmin(QMainWindow):
 
             from pagina_principal import PaginaPrincipal
             self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
-        else:
-            dlg = MessageDialog(self,
-                                title="Información",
-                                text="No hay sesión de administrador activa",
-                                editable=False)
-            dlg.exec()
 
