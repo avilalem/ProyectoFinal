@@ -17,7 +17,7 @@ class PaginaLista(QMainWindow):
         self.botonSalado.toggled.connect(self.filtrar_recetas)
         self.botonTodo.toggled.connect(self.filtrar_recetas)
         self.mostrar_recetas(self.recetas)
-        self.botonSalir.toggled.connect(self.confirmar_salida)
+        self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
