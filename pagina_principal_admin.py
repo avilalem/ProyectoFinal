@@ -9,14 +9,17 @@ from navigation import NavigationManager
 class PaginaAdmin(QMainWindow):
     def __init__(self, controlador):
         super().__init__()
-        uic.loadUi("pagina_lista.ui", self)
+        uic.loadUi("pagina_principal_admin.ui", self)
         self.db = SQLiteDatabase()
         self.controlador = controlador
+        self.nav=NavigationManager.get_instance()
+
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.botonAgregar.clicked.connect(self.agregar_receta)
-        self.botonVer.clicked.connect(self.ver_recetas)
+        self.botonVer.clicked.connect(self.ver_receta)
         self.botonBuscar.clicked.connect(self.buscar_receta)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
+        self.botonSalir.clicked.connect(self.confirmar_salida)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -64,9 +67,13 @@ class PaginaAdmin(QMainWindow):
                                 text="Sesión de administrador cerrada correctamente",
                                 editable=False)
             dlg.exec()
+
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
         else:
             dlg = MessageDialog(self,
                                 title="Información",
                                 text="No hay sesión de administrador activa",
                                 editable=False)
             dlg.exec()
+
