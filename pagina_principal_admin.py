@@ -43,14 +43,17 @@ class PaginaAdmin(QMainWindow):
         dlg.exec()
 
     def agregar_receta(self):
+        print("Abriendo PaginaAgregarReceta")
         from pagina_agregar_receta import PaginaAgregarReceta
         self.nav.mostrar("agregar_receta", PaginaAgregarReceta, self.controlador)  # ✅ Sin espacio
 
     def ver_receta(self):
+        print("Abriendo PaginaReceta")
         from pagina_lista import PaginaLista
         self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def buscar_receta(self):
+        print("Abriendo PaginaBusqueda")
         from pagina_busqueda import PaginaBusqueda
         self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
