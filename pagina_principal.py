@@ -26,7 +26,7 @@ class PaginaPrincipal(QMainWindow):
     def abrir_admin(self):
         print("PaginaPrincipal: abrir_admin llamado")
         from pagina_principal_contraseña import PaginaPassword
-        self.nav.mostrar("admin", PaginaPassword, self.controlador)
+        self.nav.mostrar("password_admin", PaginaPassword, self.controlador)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog

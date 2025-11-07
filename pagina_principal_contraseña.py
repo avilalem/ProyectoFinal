@@ -21,20 +21,15 @@ class PaginaPassword(QMainWindow):
         self.linePassword.clear()
 
     def regresar_a_principal(self):
-        print("Regresando")
         from pagina_principal import PaginaPrincipal
-        self.nav.mostrar("Receta", PaginaPrincipal, self.controlador)
+        self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
     def verificar_contrasena(self):
-        contrasena_ingresada = self.linePassword.text()
-        if contrasena_ingresada == "1234":
-            print("PaginaPassword: contraseña correcta")
+        if self.linePassword.text() == "1234":
             from pagina_principal_admin import PaginaAdmin
-            self.linePassword.clear()
             self.nav.login_administrador()
-            self.nav.mostrar("admin", PaginaAdmin, self.controlador)
+            self.nav.mostrar("admin_panel", PaginaAdmin, self.controlador)
         else:
-            print("PaginaPassword: contraseña incorrecta")
             dlg = MessageDialog(self, title="Error", text="Contraseña incorrecta.", editable=False)
             dlg.exec()
 

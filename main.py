@@ -20,14 +20,9 @@ class AppController:
 if __name__ == "__main__":
     app = QApplication([])
 
+    controlador = AppController()
     nav = NavigationManager.get_instance()
-    nav.mostrar("principal", PaginaPrincipal, None)
-    app.exec()
 
-    """controlador = AppController()
-    window = PaginaPrincipal(controlador)
-    nav.ventanas["principal"] = window
-    nav.ventana_actual = window
-    controlador.mostrar(window)
+    nav.mostrar("principal", PaginaPrincipal, controlador)
 
-    sys.exit(app.exec())"""
+    sys.exit(app.exec())
