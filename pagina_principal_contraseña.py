@@ -18,6 +18,7 @@ class PaginaPassword(QMainWindow):
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal_contraseña"))
         self.botonRegresar.clicked.connect(self.regresar_a_principal)
+        self.linePassword.clear()
 
     def regresar_a_principal(self):
         print("Regresando")
@@ -29,6 +30,7 @@ class PaginaPassword(QMainWindow):
         if contrasena_ingresada == "1234":
             print("PaginaPassword: contraseña correcta")
             from pagina_busqueda import PaginaBusqueda
+            self.linePassword.clear()
             self.nav.login_administrador()
             self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
         else:
