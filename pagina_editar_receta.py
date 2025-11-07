@@ -62,8 +62,8 @@ class PaginaEditarReceta(QMainWindow):
 
     def volver(self):
         print("Regresando")
-        from pagina_receta import PaginaReceta
-        self.nav.mostrar("receta", PaginaReceta, self.controlador)
+        from pagina_principal_admin import PaginaAdmin
+        self.nav.mostrar("admin_panel", PaginaAdmin, self.controlador)
 
     def cerrar_sesion(self):
         from navigation import NavigationManager
