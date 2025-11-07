@@ -29,7 +29,7 @@ class PaginaBusqueda(QMainWindow):
         from pagina_principal import PaginaPrincipal
         self.linePassword.clear()
         ventana_principal = PaginaPrincipal(self.controlador)
-        self.controlador.mostrar(ventana_principal)
+        self.nav.mostrar(PaginaPrincipal)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog

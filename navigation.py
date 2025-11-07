@@ -23,60 +23,38 @@ class NavigationManager:
 
     def mostrar(self, clave_ventana, ventana_class, *args, **kwargs):
         print(f"NavigationManager: navegar a clave='{clave_ventana}', clase={ventana_class.__name__}")
-
         if self.ventana_actual:
             ventana_actual_key = self._obtener_clave_ventana(self.ventana_actual)
+            print(f"Ventana actual: {ventana_actual_key}")
             if ventana_actual_key:
                 self.historial.append(ventana_actual_key)
-            try:
-                self.ventana_actual.hide()
-            except Exception:
-                pass
+                print(f"Historial -> {self.historial}")
+
+        if self.ventana_actual:
+            print(f"Ocultando {type(self.ventana_actual).__name__}")
+            self.ventana_actual.hide()
 
         if clave_ventana not in self.ventanas:
-            try:
-                print(f"NavigationManager: creando instancia de {ventana_class.__name__}")
-                self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
-            except Exception as e:
-                import traceback
-                print(f"ERROR: al crear {ventana_class.__name__}: {e}")
-                traceback.print_exc()
-                return
-        else:
-            print(f"NavigationManager: reutilizando instancia de {ventana_class.__name__}")
+            print(f"Creando instancia de {ventana_class.__name__}")
+            self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
 
         self.ventana_actual = self.ventanas[clave_ventana]
-        try:
-            self.ventana_actual.show()
-            try:
-                self.ventana_actual.raise_()
-                self.ventana_actual.activateWindow()
-            except Exception:
-                pass
-        except Exception as e:
-            print(f"ERROR: al mostrar la ventana {clave_ventana}: {e}")
-            import traceback; traceback.print_exc()
+        self.ventana_actual.show()
+        print(f"Mostrando {clave_ventana}")
 
     def volver_atras(self):
-        if len(self.historial) > 0:
-            ventana_anterior_key = self.historial.pop()
-            if ventana_anterior_key in self.ventanas:
-                if self.ventana_actual:
-                    try:
-                        self.ventana_actual.hide()
-                    except Exception:
-                        pass
-                self.ventana_actual = self.ventanas[ventana_anterior_key]
-                try:
-                    self.ventana_actual.show()
-                    try:
-                        self.ventana_actual.raise_()
-                        self.ventana_actual.activateWindow()
-                    except Exception:
-                        pass
-                except Exception as e:
-                    print(f"ERROR: al mostrar ventana anterior: {e}")
-                    import traceback; traceback.print_exc()
+        if len(self.historial) > 1:
+            # Quita la página actual
+            self.historial.pop()
+            clave_anterior = self.historial[-1]
+            print(f"Volviendo a: {clave_anterior}")
+            pagina_actual = self.paginas[self.clave_actual]
+            pagina_actual.hide()
+            pagina_anterior = self.paginas[clave_anterior]
+            pagina_anterior.show()
+            self.clave_actual = clave_anterior
+        else:
+            print("No hay más páginas a las que regresar.")
 
     def _obtener_clave_ventana(self, ventana):
         for clave, v in self.ventanas.items():
