@@ -8,15 +8,14 @@ class PaginaAgregarReceta(QMainWindow):
 
     def __init__(self, controlador):
         super().__init__()
-        uic.loadUi("ui/pagina_agregar_receta.ui", self)
+        uic.loadUi("pagina_agregar_receta.ui", self)
 
         self.db = SQLiteDatabase()
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.controlador = controlador
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
-        self.botonRegresar.clicked.connect(self.regresar_a_receta)
-        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+        self.botonRegresar.clicked.connect(self.regresar)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -79,27 +78,9 @@ class PaginaAgregarReceta(QMainWindow):
         self.textIngredientes.clear()
         self.textProcedimiento.clear()
 
-    def regresar_a_receta(self):
+    def regresar(self):
         print("Regresando")
         from pagina_principal_admin import PaginaAdmin
         self.nav.mostrar("admin_panel", PaginaAdmin, self.controlador)
 
-    def cerrar_sesion(self):
-        from navigation import NavigationManager
-        from message_dialog import MessageDialog
-
-        nav = NavigationManager.get_instance()
-        if nav.es_administrador:
-            nav.logout_administrador()
-            dlg = MessageDialog(self,
-                                title="Sesión Cerrada",
-                                text="Sesión de administrador cerrada correctamente",
-                                editable=False)
-            dlg.exec()
-        else:
-            dlg = MessageDialog(self,
-                                title="Información",
-                                text="No hay sesión de administrador activa",
-                                editable=False)
-            dlg.exec()
 

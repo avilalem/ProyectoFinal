@@ -32,6 +32,7 @@ class PaginaBusqueda(QMainWindow):
         else:
             from pagina_principal import PaginaPrincipal
             self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
+
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(

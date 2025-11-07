@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>680</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -147,7 +147,7 @@ border-radius:25px;
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>311</width>
+            <width>281</width>
             <height>41</height>
            </rect>
           </property>
@@ -157,7 +157,7 @@ border-radius:25px;
            </font>
           </property>
           <property name="text">
-           <string/>
+           <string>Nueva Receta</string>
           </property>
          </widget>
         </widget>
@@ -217,7 +217,7 @@ QRadioButton::indicator:checked {
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
+            <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
               <widget class="QLabel" name="labelCategoria">
                <property name="font">
@@ -231,7 +231,7 @@ QRadioButton::indicator:checked {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="nombreCategoria"/>
+              <widget class="QSpinBox" name="categorias"/>
              </item>
              <item>
               <widget class="QLabel" name="labelNombre">

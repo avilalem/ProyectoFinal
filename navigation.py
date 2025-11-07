@@ -36,7 +36,13 @@ class NavigationManager:
 
         if clave_ventana not in self.ventanas:
             print(f"Creando instancia de {ventana_class.__name__}")
-            self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
+            try:
+                self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
+            except Exception as e:
+                print(f"ERROR al crear la ventana '{clave_ventana}': {e}\n")
+                import traceback
+                traceback.print_exc()
+                return
 
         self.ventana_actual = self.ventanas[clave_ventana]
         self.ventana_actual.show()
