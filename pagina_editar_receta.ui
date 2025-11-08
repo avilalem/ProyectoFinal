@@ -482,7 +482,7 @@ border-radius:25px;
          <widget class="QPushButton" name="botonCerrarS">
           <property name="geometry">
            <rect>
-            <x>290</x>
+            <x>270</x>
             <y>10</y>
             <width>241</width>
             <height>41</height>

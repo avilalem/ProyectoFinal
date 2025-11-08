@@ -52,7 +52,7 @@ border-radius:25px;
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,6,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,7,1">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -431,6 +431,28 @@ border-radius:25px;
           <property name="icon">
            <iconset>
             <normaloff>icono-informacion.png</normaloff>icono-informacion.png</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="botonCerrarS">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>10</y>
+            <width>241</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Cerrar Sesión</string>
           </property>
          </widget>
         </widget>
