@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.4">
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pagina_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_receta.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +40,12 @@
     &quot;assignee&quot;: &quot;avilalem&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/avilalem/ProyectoFinal.git",
-    "accountId": "0d96eafe-34bd-418e-a0ca-531aedcd5ae6"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/avilalem/ProyectoFinal.git&quot;,
+    &quot;accountId&quot;: &quot;0d96eafe-34bd-418e-a0ca-531aedcd5ae6&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
