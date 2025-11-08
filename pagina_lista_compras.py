@@ -15,14 +15,11 @@ class PaginaListaCompras(QMainWindow):
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-
-        # Recibir la lista de compras o crear una nueva
         if lista_compras is None:
             self.lista_compras = ListaCompras(self.db)
         else:
             self.lista_compras = lista_compras
 
-        # Conectar señales CORREGIDAS
         self.borrarTodo.clicked.connect(self.borrar_lista)
         self.guardarLista.clicked.connect(self.generar_pdf)  # ¡CORREGIDO! guardarLista genera PDF
         self.selectTodo.clicked.connect(self.marcar_todo)
@@ -59,9 +56,7 @@ class PaginaListaCompras(QMainWindow):
             self.listaCompras.addItem(item)
             return
 
-        # Cargar items desde la lista de compras (ya están acumulados automáticamente)
         for nombre, cantidad, unidad in self.lista_compras.obtener_items():
-            # Formatear cantidad
             if cantidad.is_integer():
                 cantidad_str = str(int(cantidad))
             else:
@@ -74,24 +69,20 @@ class PaginaListaCompras(QMainWindow):
             self.listaCompras.addItem(item)
 
     def marcar_todo(self):
-        """Marca o desmarca todos los items"""
         if self.listaCompras.count() == 0 or self.lista_compras.esta_vacia():
             return
 
-        # Verificar si todos están marcados
         todos_marcados = all(
             self.listaCompras.item(i).checkState() == Qt.CheckState.Checked
             for i in range(self.listaCompras.count())
         )
 
-        # Marcar o desmarcar según el estado actual
         nuevo_estado = Qt.CheckState.Unchecked if todos_marcados else Qt.CheckState.Checked
 
         for i in range(self.listaCompras.count()):
             self.listaCompras.item(i).setCheckState(nuevo_estado)
 
     def borrar_lista(self):
-        """Limpia toda la lista de compras"""
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,
@@ -102,22 +93,18 @@ class PaginaListaCompras(QMainWindow):
         dlg.exec()
 
     def _limpiar_lista(self):
-        """Limpia la lista internamente"""
         self.lista_compras.limpiar()
         self.listaCompras.clear()
         QMessageBox.information(self, "Lista borrada", "La lista de compras ha sido borrada correctamente")
 
     def generar_pdf(self):
-        """Genera un PDF con solo los ingredientes NO marcados (los que faltan comprar)"""
         if self.lista_compras.esta_vacia():
             QMessageBox.warning(self, "Lista vacía", "La lista de compras está vacía")
             return
 
-        # Crear una lista temporal solo con los ingredientes NO marcados
         items_no_marcados = []
         for i in range(self.listaCompras.count()):
             item = self.listaCompras.item(i)
-            # Solo incluir items NO marcados (los que faltan comprar)
             if item.checkState() == Qt.CheckState.Unchecked:
                 items_no_marcados.append(item.text())
 
@@ -130,7 +117,6 @@ class PaginaListaCompras(QMainWindow):
             )
             return
 
-        # Generar PDF con los items no marcados
         try:
             from reportlab.pdfgen import canvas
             from reportlab.lib.pagesizes import letter
@@ -139,16 +125,13 @@ class PaginaListaCompras(QMainWindow):
             c = canvas.Canvas(nombre_archivo, pagesize=letter)
             c.setFont("Helvetica", 12)
 
-            # Título
             c.drawString(100, 750, "Lista de Compras Pendientes - Recetario Digital")
             c.line(100, 745, 500, 745)
 
-            # Subtítulo
             c.setFont("Helvetica", 10)
             c.drawString(100, 725, "Ingredientes faltantes por comprar:")
             c.line(100, 722, 500, 722)
 
-            # Items no marcados
             c.setFont("Helvetica", 12)
             y_pos = 690
             for item_text in items_no_marcados:
@@ -163,7 +146,6 @@ class PaginaListaCompras(QMainWindow):
                 c.drawString(100, y_pos, f"• {item_text}")
                 y_pos -= 20
 
-            # Pie de página
             c.setFont("Helvetica", 8)
             c.drawString(100, 50, f"Total de items pendientes: {len(items_no_marcados)}")
 
