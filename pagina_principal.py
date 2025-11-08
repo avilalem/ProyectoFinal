@@ -1,6 +1,5 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QApplication
-from message_dialog import MessageDialog
 from database import SQLiteDatabase
 from navigation import NavigationManager
 
@@ -39,10 +38,12 @@ class PaginaPrincipal(QMainWindow):
         dlg.exec()
 
     def open_info(self, page_key):
-        msg = (
-            "Esta es la ventana principal.\n\n"
+        print(f"BotonInfo")
+
+        from message_dialog import MessageDialog
+        msg = ("Esta es la ventana principal.\n\n"
             "Desde aquí puedes acceder al modo usuario o administrador. "
-            "Haz clic en 'Ingresar' para comenzar."
-        )
-        dlg = MessageDialog(self, title="Ayuda - Página Principal", text=msg, editable=False)
-        dlg.exec()
+            "Haz clic en 'Ingresar' para comenzar.")
+        dlg = MessageDialog(self, title="Pagina Principal", text=msg, editable=False)
+        result = dlg.exec()
+

@@ -13,6 +13,7 @@ class PaginaAgregarReceta(QMainWindow):
         self.db = SQLiteDatabase()
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.controlador = controlador
+        self.nav = NavigationManager.get_instance()
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar)
