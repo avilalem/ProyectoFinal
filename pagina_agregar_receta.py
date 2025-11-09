@@ -23,6 +23,7 @@ class PaginaAgregarReceta(QMainWindow):
         categoria = ["DULCE", "SALADO"]
 
         self.comboCategoria.addItems(categoria)
+        self.nombreReceta.setFocus()
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
