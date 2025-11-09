@@ -89,7 +89,16 @@ class Receta:
 
     @staticmethod
     def obtener_todas(db: SQLiteDatabase):
-        return db.fetchall("SELECT id, nombre, categoria FROM recetas ORDER BY nombre")
+        """Devuelve lista de objetos Receta en lugar de tuplas"""
+        recetas_tuplas = db.fetchall("SELECT id, nombre, categoria FROM recetas ORDER BY nombre")
+        recetas_objetos = []
+
+        for receta_id, nombre, categoria in recetas_tuplas:
+            receta = Receta.obtener_por_id(db, receta_id)
+            if receta:
+                recetas_objetos.append(receta)
+
+        return recetas_objetos
 
     @staticmethod
     def obtener_por_id(db: SQLiteDatabase, receta_id: int):
