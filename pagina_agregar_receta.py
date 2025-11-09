@@ -5,6 +5,7 @@ from database import SQLiteDatabase
 from models import Receta, Ingrediente
 from navigation import NavigationManager
 
+
 class PaginaAgregarReceta(QMainWindow):
 
     def __init__(self, controlador):
@@ -62,13 +63,13 @@ class PaginaAgregarReceta(QMainWindow):
         unidad = unidad.lower().strip()
 
         unidades_map = {
-
+            # Peso
             'g': 'gramos', 'gr': 'gramos', 'gramo': 'gramos', 'gramos': 'gramos',
             'kg': 'kilogramos', 'kilo': 'kilogramos', 'kilogramo': 'kilogramos', 'kilogramos': 'kilogramos',
             'lb': 'libras', 'lbs': 'libras', 'libra': 'libras', 'libras': 'libras',
             'oz': 'onzas', 'onza': 'onzas', 'onzas': 'onzas',
 
-
+            # Volumen
             'ml': 'mililitros', 'mililitro': 'mililitros', 'mililitros': 'mililitros', 'mlts': 'mililitros',
             'l': 'litros', 'lt': 'litros', 'lts': 'litros', 'litro': 'litros', 'litros': 'litros',
             'taza': 'tazas', 'tazas': 'tazas', 'taz': 'tazas',
@@ -77,16 +78,18 @@ class PaginaAgregarReceta(QMainWindow):
             'cucharaditas': 'cucharaditas',
             'copa': 'copas', 'copas': 'copas',
 
-
+            # Unidades
             'unidad': 'unidades', 'unidades': 'unidades', 'uni': 'unidades', 'ud': 'unidades',
             'pizca': 'pizcas', 'pizcas': 'pizcas',
             'puñado': 'puñados', 'puñados': 'puñados',
 
+            # Especias/condimentos
+            'al gusto': 'al gusto', 'gusto': 'al gusto',
 
+            # Otros
             'diente': 'dientes', 'dientes': 'dientes',
             'hoja': 'hojas', 'hojas': 'hojas',
             'rama': 'ramas', 'ramas': 'ramas'
-            'al gusto'
         }
 
         return unidades_map.get(unidad, unidad)
@@ -102,11 +105,16 @@ class PaginaAgregarReceta(QMainWindow):
                 continue
 
             try:
-                cantidad = float(partes[0])
-                unidad_original = partes[1]
-                unidad_normalizada = self.normalizar_unidad(unidad_original)
-                nombre_ing = ' '.join(partes[2:])
+                if partes[0].lower() == 'al' and partes[1].lower() == 'gusto':
+                    cantidad = 0
+                    unidad_original = 'al gusto'
+                    nombre_ing = ' '.join(partes[2:])
+                else:
+                    cantidad = float(partes[0])
+                    unidad_original = partes[1]
+                    nombre_ing = ' '.join(partes[2:])
 
+                unidad_normalizada = self.normalizar_unidad(unidad_original)
                 ingredientes.append((cantidad, nombre_ing, unidad_normalizada))
                 print(
                     f"Ingrediente parseado: {cantidad} {unidad_normalizada} de {nombre_ing} (original: {unidad_original})")
@@ -122,7 +130,6 @@ class PaginaAgregarReceta(QMainWindow):
 
     def guardar_receta(self):
         try:
-            # Obtener datos de la interfaz
             nombre = self.nombreReceta.text().strip()
 
             categoria_val = self.categorias.value()
@@ -143,7 +150,6 @@ class PaginaAgregarReceta(QMainWindow):
 
             receta = Receta(self.db, nombre, categoria, procedimiento)
 
-            # Parsear y agregar ingredientes
             ingredientes_parseados = self.parsear_ingredientes(ingredientes_texto)
             if not ingredientes_parseados:
                 QMessageBox.warning(self, "Error",
@@ -154,7 +160,8 @@ class PaginaAgregarReceta(QMainWindow):
                                     "200 g harina\n"
                                     "2 cucharadas azúcar\n"
                                     "1 taza leche\n"
-                                    "500 ml agua"
+                                    "500 ml agua\n"
+                                    "al gusto sal"
                                     )
                 return
 
@@ -162,7 +169,6 @@ class PaginaAgregarReceta(QMainWindow):
                 ingrediente = Ingrediente(self.db, nombre_ing, unidad)
                 receta.agregar_ingrediente(ingrediente, cantidad)
 
-            # Guardar receta
             receta_id = receta.guardar()
             if receta_id:
                 QMessageBox.information(

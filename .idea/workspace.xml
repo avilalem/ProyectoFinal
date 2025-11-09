@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.6">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_agregar_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_agregar_receta.py" afterDir="false" />
-    </list>
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.7" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -361,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762661776280</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Version 2.7">
+      <option name="closed" value="true" />
+      <created>1762662694372</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1762662694372</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,7 +393,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Version 2.1" />
     <MESSAGE value="Version 2.2" />
     <MESSAGE value="Version 2.3" />
     <MESSAGE value="6/11 @08:13" />
@@ -414,6 +418,7 @@
     <MESSAGE value="8/11 @016:18" />
     <MESSAGE value="Version 2.6" />
     <MESSAGE value="08/11 @22:17" />
-    <option name="LAST_COMMIT_MESSAGE" value="08/11 @22:17" />
+    <MESSAGE value="Version 2.7" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 2.7" />
   </component>
 </project>
