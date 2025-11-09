@@ -15,7 +15,7 @@ class PaginaBusqueda(QMainWindow):
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
-        self.resultadosLista.itemClicked.connect(self.mostrar_receta)
+        self.resultadosLista.itemDoubleClicked.connect(self.abrir_editar_receta)  # CAMBIADO A DoubleClicked
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.recetas = Receta.obtener_todas(self.db)
         self.actualizar_lista(self.recetas)
@@ -43,14 +43,6 @@ class PaginaBusqueda(QMainWindow):
         )
         dlg.exec()
 
-    def regresar_inteligente(self):
-        if self.nav.es_administrador:
-            from pagina_principal_contraseña import PaginaPassword
-            self.nav.mostrar("admin", PaginaPassword, self.controlador)
-        else:
-            from pagina_principal import PaginaPrincipal
-            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
-
     def buscar_recetas(self):
         texto = self.cajaBusqueda.text().strip().lower()
 
@@ -69,12 +61,35 @@ class PaginaBusqueda(QMainWindow):
 
         for receta in lista_recetas:
             item = QListWidgetItem(receta.nombre)
-            item.setData(Qt.ItemDataRole.UserRole, receta)
+            item.setData(Qt.ItemDataRole.UserRole, receta.id)  # GUARDAR SOLO EL ID
             self.resultadosLista.addItem(item)
 
     def mostrar_receta(self, item):
-        receta = item.data(Qt.ItemDataRole.UserRole)
-        self.textEdit.setPlainText(receta.procedimiento)
+        receta_id = item.data(Qt.ItemDataRole.UserRole)
+        receta = Receta.obtener_por_id(self.db, receta_id)
+        if receta:
+            texto = f"Nombre: {receta.nombre}\n"
+            texto += f"Categoría: {receta.categoria}\n\n"
+            texto += f"Ingredientes:\n{receta.mostrar_ingredientes_ajustados(1.0)}\n\n"
+            texto += f"Instrucciones:\n{receta.instrucciones}"
+            self.textEdit.setPlainText(texto)
+
+    def abrir_editar_receta(self, item):
+        if not self.nav.es_administrador:
+            from message_dialog import MessageDialog
+            dlg = MessageDialog(
+                self,
+                title="Acceso denegado",
+                text="Solo los administradores pueden editar recetas",
+                editable=False
+            )
+            dlg.exec()
+            return
+
+        receta_id = item.data(Qt.ItemDataRole.UserRole)
+        from pagina_editar_receta import PaginaEditarReceta
+        ventana_editar = PaginaEditarReceta(self.controlador, receta_id)
+        self.controlador.mostrar(ventana_editar)
 
     def abrir_pagina_lista(self):
         print("Siguiente Pagina")
@@ -84,11 +99,15 @@ class PaginaBusqueda(QMainWindow):
     def open_info(self, page_key):
         from message_dialog import MessageDialog
         msg = (
-            "Esta es la ventana de Busqueda.\n\n"
-            "Desde aquí puedes ingresar una palabra clave del titulo de la Receta. "
-            "Haz clic en la receta para verla"
+            "Esta es la ventana de Búsqueda.\n\n"
+            "Funcionalidades:\n"
+            "Escribe para filtrar recetas por nombre\n"
+            "Haz DOBLE CLIC en una receta para editarla (solo administradores)\n"
+            "Haz CLIC en una receta para ver los detalles\n"
+            "Botón 'Ver Todas' para ver lista completa\n\n"
+            "Modo Administrador: Puedes editar recetas existentes"
         )
-        dlg = MessageDialog(self, title="Ayuda - Página Principal", text=msg, editable=False)
+        dlg = MessageDialog(self, title="Ayuda - Búsqueda", text=msg, editable=False)
         dlg.exec()
 
     def cerrar_sesion(self):
