@@ -20,6 +20,7 @@ class PaginaPassword(QMainWindow):
         self.botonRegresar.clicked.connect(self.regresar_a_principal)
         self.linePassword.clear()
 
+
     def regresar_a_principal(self):
         from pagina_principal import PaginaPrincipal
         self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
