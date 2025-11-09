@@ -19,6 +19,7 @@ class PaginaPassword(QMainWindow):
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_principal_contraseña"))
         self.botonRegresar.clicked.connect(self.regresar_a_principal)
         self.linePassword.clear()
+        self.linePassword.returnPressed.connect(self.verificar_contrasena)
         self.linePassword.setFocus()
 
 
