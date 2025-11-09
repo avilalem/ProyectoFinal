@@ -246,7 +246,7 @@ QRadioButton::indicator:checked {
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="categorias"/>
+              <widget class="QComboBox" name="comboCategoria"/>
              </item>
              <item>
               <widget class="QLabel" name="labelIngredientes">

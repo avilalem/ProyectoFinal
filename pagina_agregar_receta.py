@@ -1,6 +1,6 @@
 import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox
+from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox,QComboBox
 from database import SQLiteDatabase
 from models import Receta, Ingrediente
 from navigation import NavigationManager
@@ -15,19 +15,14 @@ class PaginaAgregarReceta(QMainWindow):
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-
+        self.comboCategoria = self.findChild(QComboBox, "comboCategoria")
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar)
+        categoria = ["DULCE", "SALADO"]
 
-        self.configurar_categorias()
-
-    def configurar_categorias(self):
-        if hasattr(self.categorias, 'setMinimum') and hasattr(self.categorias, 'setMaximum'):
-            self.categorias.setMinimum(0)
-            self.categorias.setMaximum(1)
-            self.categorias.setValue(0)
+        self.comboCategoria.addItems(categoria)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
