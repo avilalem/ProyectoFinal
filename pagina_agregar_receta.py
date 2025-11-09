@@ -64,35 +64,35 @@ class PaginaAgregarReceta(QMainWindow):
 
         unidades_map = {
             # Peso
-            'g': 'gramos', 'gr': 'gramos', 'gramo': 'gramos', 'gramos': 'gramos',
-            'kg': 'kilogramos', 'kilo': 'kilogramos', 'kilogramo': 'kilogramos', 'kilogramos': 'kilogramos',
-            'lb': 'libras', 'lbs': 'libras', 'libra': 'libras', 'libras': 'libras',
-            'oz': 'onzas', 'onza': 'onzas', 'onzas': 'onzas',
+            'g': 'GRAMOS', 'gr': 'GRAMOS', 'gramo': 'GRAMOS', 'gramos': 'GRAMOS',
+            'kg': 'KILOGRAMOS', 'kilo': 'KILOGRAMOS', 'kilogramo': 'KILOGRAMOS', 'kilogramos': 'KILOGRAMOS',
+            'lb': 'LIBRAS', 'lbs': 'LIBRAS', 'libra': 'LIBRAS', 'libras': 'LIBRAS',
+            'oz': 'ONZAS', 'onza': 'ONZAS', 'onzas': 'ONZAS',
 
             # Volumen
-            'ml': 'mililitros', 'mililitro': 'mililitros', 'mililitros': 'mililitros', 'mlts': 'mililitros',
-            'l': 'litros', 'lt': 'litros', 'lts': 'litros', 'litro': 'litros', 'litros': 'litros',
-            'taza': 'tazas', 'tazas': 'tazas', 'taz': 'tazas',
-            'cda': 'cucharadas', 'cdas': 'cucharadas', 'cucharada': 'cucharadas', 'cucharadas': 'cucharadas',
-            'cdta': 'cucharaditas', 'cdtas': 'cucharaditas', 'cucharadita': 'cucharaditas',
-            'cucharaditas': 'cucharaditas',
-            'copa': 'copas', 'copas': 'copas',
+            'ml': 'MILILITROS', 'mililitro': 'MILILITROS', 'mililitros': 'MILILITROS', 'mlts': 'MILILITROS',
+            'l': 'LITROS', 'lt': 'LITROS', 'lts': 'LITROS', 'litro': 'LITROS', 'litros': 'LITROS',
+            'taza': 'TAZAS', 'tazas': 'TAZAS', 'taz': 'TAZAS',
+            'cda': 'CUCHARADAS', 'cdas': 'CUCHARADAS', 'cucharada': 'CUCHARADAS', 'cucharadas': 'CUCHARADAS',
+            'cdta': 'CUCHARADITAS', 'cdtas': 'CUCHARADITAS', 'cucharadita': 'CUCHARADITAS',
+            'cucharaditas': 'CUCHARADITAS',
+            'copa': 'COPAS', 'copas': 'COPAS',
 
             # Unidades
-            'unidad': 'unidades', 'unidades': 'unidades', 'uni': 'unidades', 'ud': 'unidades',
-            'pizca': 'pizcas', 'pizcas': 'pizcas',
-            'puñado': 'puñados', 'puñados': 'puñados',
+            'unidad': 'UNIDADES', 'unidades': 'UNIDADES', 'uni': 'UNIDADES', 'ud': 'UNIDADES',
+            'pizca': 'PIZCAS', 'pizcas': 'PIZCAS',
+            'puñado': 'PUÑADOS', 'puñados': 'PUÑADOS',
 
             # Especias/condimentos
-            'al gusto': 'al gusto', 'gusto': 'al gusto',
+            'al gusto': 'AL GUSTO', 'gusto': 'AL GUSTO',
 
             # Otros
-            'diente': 'dientes', 'dientes': 'dientes',
-            'hoja': 'hojas', 'hojas': 'hojas',
-            'rama': 'ramas', 'ramas': 'ramas'
+            'diente': 'DIENTES', 'dientes': 'DIENTES',
+            'hoja': 'HOJAS', 'hojas': 'HOJAS',
+            'rama': 'RAMAS', 'ramas': 'RAMAS'
         }
 
-        return unidades_map.get(unidad, unidad)
+        return unidades_map.get(unidad, unidad.upper())  # Si no está en el mapa, convierte a MAYÚSCULAS
 
     def parsear_ingredientes(self, texto_ingredientes):
         lineas = texto_ingredientes.split('\n')
@@ -105,19 +105,23 @@ class PaginaAgregarReceta(QMainWindow):
                 continue
 
             try:
+                # Manejar caso especial "al gusto"
                 if partes[0].lower() == 'al' and partes[1].lower() == 'gusto':
                     cantidad = 0
                     unidad_original = 'al gusto'
                     nombre_ing = ' '.join(partes[2:])
                 else:
+                    # Caso normal: cantidad numérica
                     cantidad = float(partes[0])
                     unidad_original = partes[1]
                     nombre_ing = ' '.join(partes[2:])
 
                 unidad_normalizada = self.normalizar_unidad(unidad_original)
+                # Convertir nombre del ingrediente a MAYÚSCULAS
+                nombre_ing = nombre_ing.upper().strip()
+
                 ingredientes.append((cantidad, nombre_ing, unidad_normalizada))
-                print(
-                    f"Ingrediente parseado: {cantidad} {unidad_normalizada} de {nombre_ing} (original: {unidad_original})")
+                print(f"Ingrediente parseado: {cantidad} {unidad_normalizada} de {nombre_ing}")
 
             except ValueError:
                 print(f"Línea ignorada (cantidad no numérica): {linea}")
@@ -130,13 +134,14 @@ class PaginaAgregarReceta(QMainWindow):
 
     def guardar_receta(self):
         try:
-            nombre = self.nombreReceta.text().strip()
+            # Obtener datos de la interfaz y convertir a MAYÚSCULAS
+            nombre = self.nombreReceta.text().strip().upper()
 
             categoria_val = self.categorias.value()
-            categoria = "DULCE" if categoria_val == 0 else "SALADO"
+            categoria = "DULCE" if categoria_val == 0 else "SALADO"  # Ya está en mayúsculas
 
             ingredientes_texto = self.listaIngredientes.toPlainText().strip()
-            procedimiento = self.procedimiento.toPlainText().strip()
+            procedimiento = self.procedimiento.toPlainText().strip().upper()
 
             if not nombre:
                 QMessageBox.warning(self, "Error", "El nombre de la receta es obligatorio")
@@ -150,6 +155,7 @@ class PaginaAgregarReceta(QMainWindow):
 
             receta = Receta(self.db, nombre, categoria, procedimiento)
 
+            # Parsear y agregar ingredientes (ya se convierten a mayúsculas en parsear_ingredientes)
             ingredientes_parseados = self.parsear_ingredientes(ingredientes_texto)
             if not ingredientes_parseados:
                 QMessageBox.warning(self, "Error",
@@ -166,9 +172,10 @@ class PaginaAgregarReceta(QMainWindow):
                 return
 
             for cantidad, nombre_ing, unidad in ingredientes_parseados:
-                ingrediente = Ingrediente(self.db, nombre_ing, unidad)
+                ingrediente = Ingrediente(self.db, nombre_ing, unidad)  # Ya en mayúsculas
                 receta.agregar_ingrediente(ingrediente, cantidad)
 
+            # Guardar receta
             receta_id = receta.guardar()
             if receta_id:
                 QMessageBox.information(
