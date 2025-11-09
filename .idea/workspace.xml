@@ -51,26 +51,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pagina_busqueda.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pagina_lista.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pagina_principal.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pagina_principal_contraseña.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "Python.pagina_agregar_receta.executor": "Run",
+    "Python.pagina_busqueda.executor": "Run",
+    "Python.pagina_lista.executor": "Run",
+    "Python.pagina_principal.executor": "Run",
+    "Python.pagina_principal_contraseña.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -446,7 +447,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762666696290</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="9/11 00:07">
+      <option name="closed" value="true" />
+      <created>1762668408331</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1762668408331</updated>
+    </task>
+    <task id="LOCAL-00047" summary="9/11 00:09">
+      <option name="closed" value="true" />
+      <created>1762668565047</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1762668565047</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,8 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="6/11 @ 18:08" />
-    <MESSAGE value="6/11 @ 18:20" />
     <MESSAGE value="6/11 @ 18:23" />
     <MESSAGE value="6/11 @ 18:30" />
     <MESSAGE value="Version 2.4" />
@@ -498,6 +513,8 @@
     <MESSAGE value="Version 2.10" />
     <MESSAGE value="Version 2.11" />
     <MESSAGE value="Version 2.12" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 2.12" />
+    <MESSAGE value="9/11 00:07" />
+    <MESSAGE value="9/11 00:09" />
+    <option name="LAST_COMMIT_MESSAGE" value="9/11 00:09" />
   </component>
 </project>
