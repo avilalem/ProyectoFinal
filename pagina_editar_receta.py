@@ -129,7 +129,6 @@ class PaginaEditarReceta(QMainWindow):
                     unidad_original = 'al gusto'
                     nombre_ing = ' '.join(partes[2:])
                 else:
-                    # Caso normal: cantidad numérica
                     cantidad = float(partes[0])
                     unidad_original = partes[1]
                     nombre_ing = ' '.join(partes[2:])
@@ -187,7 +186,6 @@ class PaginaEditarReceta(QMainWindow):
             QMessageBox.critical(self, "Error", f"Error al eliminar receta: {str(e)}")
 
     def cancelar_cambios(self):
-        """Cancela los cambios y recarga los datos originales"""
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
             self,

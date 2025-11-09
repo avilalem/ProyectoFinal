@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.12">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_busqueda.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_busqueda.py" afterDir="false" />
-    </list>
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.13" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,27 +51,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.pagina_agregar_receta.executor": "Run",
-    "Python.pagina_busqueda.executor": "Run",
-    "Python.pagina_lista.executor": "Run",
-    "Python.pagina_principal.executor": "Run",
-    "Python.pagina_principal_contraseña.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pagina_agregar_receta.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pagina_busqueda.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pagina_lista.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pagina_principal.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pagina_principal_contraseña.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -450,15 +447,6 @@
       <option name="project" value="LOCAL" />
       <updated>1762666696290</updated>
     </task>
-    <task id="LOCAL-00046" summary="Version 2.12">
-      <option name="closed" value="true" />
-      <created>1762666745683</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1762666745683</updated>
-    </task>
-    <option name="localTasksCounter" value="47" />
     <task id="LOCAL-00046" summary="9/11 00:07">
       <option name="closed" value="true" />
       <created>1762668408331</created>
@@ -475,7 +463,7 @@
       <option name="project" value="LOCAL" />
       <updated>1762668565047</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
