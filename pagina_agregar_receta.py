@@ -275,5 +275,4 @@ class PaginaAgregarReceta(QMainWindow):
 
     def regresar(self):
         from pagina_principal_admin import PaginaAdmin
-        ventana_admin = PaginaAdmin(self.controlador)
-        self.controlador.mostrar(ventana_admin)
+        self.nav.mostrar("admin_panel", PaginaAdmin, self.controlador)

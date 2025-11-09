@@ -23,26 +23,25 @@ class NavigationManager:
 
     def mostrar(self, clave_ventana, ventana_class, *args, **kwargs):
         print(f"NavigationManager: navegar a clave='{clave_ventana}', clase={ventana_class.__name__}")
-        if self.ventana_actual:
-            ventana_actual_key = self._obtener_clave_ventana(self.ventana_actual)
-            print(f"Ventana actual: {ventana_actual_key}")
-            if ventana_actual_key:
-                self.historial.append(ventana_actual_key)
-                print(f"Historial -> {self.historial}")
 
-        if self.ventana_actual:
-            print(f"Ocultando {type(self.ventana_actual).__name__}")
-            self.ventana_actual.hide()
+        # 🟡 CERRAR TODAS las ventanas existentes
+        for clave, ventana in list(self.ventanas.items()):
+            print(f"Cerrando ventana: {clave}")
+            ventana.close()
 
-        if clave_ventana not in self.ventanas:
-            print(f"Creando instancia de {ventana_class.__name__}")
-            try:
-                self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
-            except Exception as e:
-                print(f"ERROR al crear la ventana '{clave_ventana}': {e}\n")
-                import traceback
-                traceback.print_exc()
-                return
+        # 🟡 LIMPIAR el diccionario completamente
+        self.ventanas.clear()
+        self.ventana_actual = None
+
+        # Crear nueva ventana
+        print(f"Creando nueva instancia de {ventana_class.__name__}")
+        try:
+            self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)
+        except Exception as e:
+            print(f"ERROR al crear la ventana '{clave_ventana}': {e}\n")
+            import traceback
+            traceback.print_exc()
+            return
 
         self.ventana_actual = self.ventanas[clave_ventana]
         self.ventana_actual.show()

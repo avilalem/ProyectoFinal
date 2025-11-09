@@ -43,11 +43,9 @@ class PaginaListaCompras(QMainWindow):
 
     def regresar_a_busqueda(self):
         from pagina_busqueda import PaginaBusqueda
-        ventana_busqueda = PaginaBusqueda(self.controlador)
-        self.controlador.mostrar(ventana_busqueda)
+        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
     def cargar_lista_compras(self):
-        """Carga los ingredientes desde la lista de compras"""
         self.listaCompras.clear()
 
         if self.lista_compras.esta_vacia():

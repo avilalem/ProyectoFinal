@@ -29,6 +29,9 @@ class PaginaAdmin(QMainWindow):
             on_confirm=lambda: QApplication.quit()
         )
         dlg.exec()
+    def regresar(self):
+        from pagina_principal import PaginaPrincipal
+        self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
     def open_info(self, page_key):
         msg = (

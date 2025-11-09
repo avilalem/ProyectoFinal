@@ -80,8 +80,7 @@ class PaginaReceta(QMainWindow):
 
     def regresar(self):
         from pagina_busqueda import PaginaBusqueda
-        ventana_busqueda=PaginaBusqueda(self.controlador)
-        self.controlador.mostrar(ventana_busqueda)
+        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
 
     def actualizar_botones_administrador(self):
         from navigation import NavigationManager

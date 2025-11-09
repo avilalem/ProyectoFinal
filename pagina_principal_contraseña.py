@@ -22,8 +22,6 @@ class PaginaPassword(QMainWindow):
         self.linePassword.returnPressed.connect(self.verificar_contrasena)
         self.linePassword.setFocus()
 
-
-
     def regresar_a_principal(self):
         from pagina_principal import PaginaPrincipal
         self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
