@@ -27,8 +27,8 @@ class PaginaBusqueda(QMainWindow):
 
     def regresar_inteligente(self):
         if self.nav.es_administrador:
-            from pagina_principal_admin import PaginaAdmin
-            self.nav.mostrar("admin_panel", PaginaAdmin, self.controlador)
+            from pagina_principal_contraseña import PaginaPassword
+            self.nav.mostrar("admin", PaginaPassword, self.controlador)
         else:
             from pagina_principal import PaginaPrincipal
             self.nav.mostrar("principal", PaginaPrincipal, self.controlador)

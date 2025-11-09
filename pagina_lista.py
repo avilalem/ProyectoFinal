@@ -1,9 +1,10 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication
+from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QApplication, QButtonGroup
 from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from models import Receta, Ingrediente
 from navigation import NavigationManager
+
 
 class PaginaLista(QMainWindow):
     def __init__(self, controlador):
@@ -13,22 +14,46 @@ class PaginaLista(QMainWindow):
         self.db = SQLiteDatabase()
         self.recetas = Receta.obtener_todas(self.db)
         self.controlador = controlador
-        self.botonDulce.toggled.connect(self.filtrar_recetas)
-        self.botonSalado.toggled.connect(self.filtrar_recetas)
-        self.botonTodo.toggled.connect(self.filtrar_recetas)
-        self.mostrar_recetas(self.recetas)
+        self.nav = NavigationManager.get_instance()
+        self.radio_group = QButtonGroup(self)
+        self.radio_group.addButton(self.botonDulce)
+        self.radio_group.addButton(self.botonSalado)
+        self.radio_group.addButton(self.botonTodo)
+        self.botonTodo.setChecked(True)
+        self.radio_group.buttonToggled.connect(self.on_radio_toggled)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.actualizar_botones_administrador()
-        self.nav = NavigationManager.get_instance()
+        self.mostrar_recetas(self.recetas)
 
+    def on_radio_toggled(self, button, checked):
+        if checked:
+            print(f"Radio seleccionado: {button.text()}")
+            self.filtrar_recetas()
+
+    def filtrar_recetas(self):
+        if self.botonDulce.isChecked():
+            filtradas = [r for r in self.recetas if r.tipo.lower() == "dulce"]
+            print(f"Mostrando {len(filtradas)} recetas dulces")
+        elif self.botonSalado.isChecked():
+            filtradas = [r for r in self.recetas if r.tipo.lower() == "salado"]
+            print(f"Mostrando {len(filtradas)} recetas saladas")
+        else:
+            filtradas = self.recetas
+            print(f"Mostrando todas las {len(filtradas)} recetas")
+
+        self.mostrar_recetas(filtradas)
 
     def regresar_a_busqueda(self):
-        print("Regresando")
-        from pagina_busqueda import PaginaBusqueda
-        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
+        if self.nav.es_administrador:
+            from pagina_principal_admin import PaginaAdmin
+            self.nav.mostrar("admin", PaginaAdmin, self.controlador)
+        else:
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
+            print("Regresando")
 
 
     def confirmar_salida(self):
@@ -40,15 +65,7 @@ class PaginaLista(QMainWindow):
             on_confirm=lambda: QApplication.quit()
         )
         dlg.exec()
-    def filtrar_recetas(self):
-        if self.botonDulce.isChecked():
-            filtradas = [r for r in self.recetas if r.tipo.lower() == "dulce"]
-        elif self.botonSalado.isChecked():
-            filtradas = [r for r in self.recetas if r.tipo.lower() == "salado"]
-        else:
-            filtradas = self.recetas
 
-        self.mostrar_recetas(filtradas)
 
     def mostrar_recetas(self, lista):
         self.listaRecetas.clear()
