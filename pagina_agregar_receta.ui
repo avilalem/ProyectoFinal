@@ -193,7 +193,7 @@ QRadioButton::indicator:checked {
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,1">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="8,1">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -219,21 +219,6 @@ QRadioButton::indicator:checked {
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QLabel" name="labelCategoria">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Categoria</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="categorias"/>
-             </item>
-             <item>
               <widget class="QLabel" name="labelNombre">
                <property name="font">
                 <font>
@@ -249,19 +234,19 @@ QRadioButton::indicator:checked {
               <widget class="QLineEdit" name="nombreReceta"/>
              </item>
              <item>
-              <widget class="QLabel" name="labelUnidadesMetricas">
+              <widget class="QLabel" name="labelCategoria">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
                 </font>
                </property>
                <property name="text">
-                <string>Unidades Metricas</string>
+                <string>Categoria</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="unidadesMetricas"/>
+              <widget class="QSpinBox" name="categorias"/>
              </item>
              <item>
               <widget class="QLabel" name="labelIngredientes">

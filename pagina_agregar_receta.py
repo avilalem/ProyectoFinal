@@ -51,7 +51,6 @@ class PaginaAgregarReceta(QMainWindow):
         from message_dialog import MessageDialog
         categoria = self.lineCategoria.text().strip()
         nombre = self.lineNombre.text().strip()
-        unidad = self.spinUnidad.text()  # valor del spinbox
         ingredientes_texto = self.textIngredientes.toPlainText().strip()
         procedimiento = self.textProcedimiento.toPlainText().strip()
 
