@@ -12,7 +12,7 @@ class PaginaAdmin(QMainWindow):
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-
+        self.botonRegresar.clicked.connect(self.regresar)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.botonAgregar.clicked.connect(self.agregar_receta)
         self.botonVer.clicked.connect(self.ver_receta)
