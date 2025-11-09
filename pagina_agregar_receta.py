@@ -189,16 +189,45 @@ class PaginaAgregarReceta(QMainWindow):
 
     def guardar_receta(self):
         try:
-            # Obtener datos de la interfaz y convertir a MAYÚSCULAS
             nombre = self.nombreReceta.text().strip().upper()
 
-            categoria_val = self.categorias.value()
-            categoria = "DULCE" if categoria_val == 0 else "SALADO"
+            categoria = self.comboCategoria.currentText().strip().upper()
 
             ingredientes_texto = self.listaIngredientes.toPlainText().strip()
             procedimiento = self.procedimiento.toPlainText().strip().upper()
 
-            # Parsear y agregar ingredientes
+            if not nombre:
+                QMessageBox.warning(self, "Error", "El nombre de la receta es obligatorio")
+                self.nombreReceta.setFocus()
+                return
+
+            if len(nombre) < 2:
+                QMessageBox.warning(self, "Error", "El nombre de la receta debe tener al menos 2 caracteres")
+                self.nombreReceta.setFocus()
+                return
+
+            if categoria not in ["DULCE", "SALADO"]:
+                QMessageBox.warning(self, "Error", "Debes seleccionar una categoría válida (DULCE o SALADO)")
+                self.comboCategoria.setFocus()
+                return
+
+            if not ingredientes_texto:
+                QMessageBox.warning(self, "Error", "Debes ingresar al menos un ingrediente")
+                self.listaIngredientes.setFocus()
+                return
+
+            if not procedimiento:
+                QMessageBox.warning(self, "Error", "El procedimiento es obligatorio")
+                self.procedimiento.setFocus()
+                return
+
+            if len(procedimiento) < 10:
+                QMessageBox.warning(self, "Error", "El procedimiento debe tener al menos 10 caracteres")
+                self.procedimiento.setFocus()
+                return
+
+            receta = Receta(self.db, nombre, categoria, procedimiento)
+
             ingredientes_parseados = self.parsear_ingredientes(ingredientes_texto)
             if not ingredientes_parseados:
                 QMessageBox.warning(self, "Error",
@@ -214,13 +243,10 @@ class PaginaAgregarReceta(QMainWindow):
                                     )
                 return
 
-            receta = Receta(self.db, nombre, categoria, procedimiento)
-
             for cantidad, nombre_ing, unidad in ingredientes_parseados:
                 ingrediente = Ingrediente(self.db, nombre_ing, unidad)
                 receta.agregar_ingrediente(ingrediente, cantidad)
 
-            # Guardar receta
             receta_id = receta.guardar()
             if receta_id:
                 QMessageBox.information(
@@ -241,7 +267,7 @@ class PaginaAgregarReceta(QMainWindow):
 
     def limpiar_campos(self):
         self.nombreReceta.clear()
-        self.categorias.setValue(0)
+        self.comboCategoria.setCurrentIndex(0)
         self.listaIngredientes.clear()
         self.procedimiento.clear()
         self.nombreReceta.setFocus()
