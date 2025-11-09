@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.10">
-      <change beforePath="$PROJECT_DIR$/pagina_agregar_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_agregar_receta.py" afterDir="false" />
-    </list>
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.10" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -416,7 +414,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762665945430</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Version 2.10">
+      <option name="closed" value="true" />
+      <created>1762666109964</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1762666109964</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Version 2.10">
+      <option name="closed" value="true" />
+      <created>1762666292171</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1762666292171</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
