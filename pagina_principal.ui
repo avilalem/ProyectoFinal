@@ -482,10 +482,7 @@
 }</string>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,5,3">
        <property name="spacing">
@@ -520,10 +517,7 @@ border-radius:25px;
 </string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <widget class="QPushButton" name="botonSalir">
           <property name="geometry">
@@ -546,35 +540,6 @@ border-radius:25px;
           <property name="icon">
            <iconset>
             <normaloff>icono-salir.png</normaloff>icono-salir.png</iconset>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="botonRegresar">
-          <property name="geometry">
-           <rect>
-            <x>680</x>
-            <y>10</y>
-            <width>51</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>icono-atras.png</normaloff>icono-atras.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>30</width>
-            <height>30</height>
-           </size>
           </property>
          </widget>
         </widget>
@@ -604,10 +569,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <widget class="QPushButton" name="botonStart">
           <property name="geometry">
@@ -621,6 +583,7 @@ QPushButton:pressed {
           <property name="font">
            <font>
             <pointsize>20</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -680,10 +643,7 @@ QPushButton:pressed {
 }</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
+          <enum>QFrame::NoFrame</enum>
          </property>
          <widget class="QPushButton" name="botonAdmin">
           <property name="geometry">
@@ -696,6 +656,7 @@ QPushButton:pressed {
           </property>
           <property name="font">
            <font>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
