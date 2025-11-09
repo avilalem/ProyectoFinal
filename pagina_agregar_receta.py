@@ -61,7 +61,6 @@ class PaginaAgregarReceta(QMainWindow):
             return
 
         receta = Receta(self.db, nombre, procedimiento, categoria)
-        receta.unidad = unidad
         receta.agregar_ingredientes_desde_texto(ingredientes_texto)
         receta.guardar()
 
