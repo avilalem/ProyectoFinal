@@ -40,14 +40,70 @@ class PaginaAgregarReceta(QMainWindow):
         dlg.exec()
 
     def confirmar_guardar(self):
-        from confirm_dialog import ConfirmDialog
-        dlg = ConfirmDialog(
-            self,
-            title="Guardar receta",
-            text="¿Deseas guardar esta receta en la base de datos?",
-            on_confirm=self.guardar_receta
-        )
-        dlg.exec()
+        if self.validar_campos():
+            from confirm_dialog import ConfirmDialog
+            dlg = ConfirmDialog(
+                self,
+                title="Guardar receta",
+                text="¿Deseas guardar esta receta en la base de datos?",
+                on_confirm=self.guardar_receta
+            )
+            dlg.exec()
+
+    def validar_campos(self):
+        nombre = self.nombreReceta.text().strip()
+        ingredientes_texto = self.listaIngredientes.toPlainText().strip()
+        procedimiento = self.procedimiento.toPlainText().strip()
+
+        if not nombre:
+            QMessageBox.warning(self, "Error", "El nombre de la receta es obligatorio")
+            self.nombreReceta.setFocus()
+            return False
+
+        if len(nombre) < 2:
+            QMessageBox.warning(self, "Error", "El nombre de la receta debe tener al menos 2 caracteres")
+            self.nombreReceta.setFocus()
+            return False
+
+        if not ingredientes_texto:
+            QMessageBox.warning(self, "Error", "Debes ingresar al menos un ingrediente")
+            self.listaIngredientes.setFocus()
+            return False
+
+        lineas_validas = [linea.strip() for linea in ingredientes_texto.split('\n') if linea.strip()]
+        if len(lineas_validas) == 0:
+            QMessageBox.warning(self, "Error", "Debes ingresar al menos un ingrediente válido")
+            self.listaIngredientes.setFocus()
+            return False
+
+        tiene_ingredientes_validos = False
+        for linea in lineas_validas:
+            partes = linea.split()
+            if len(partes) >= 3:
+                tiene_ingredientes_validos = True
+                break
+
+        if not tiene_ingredientes_validos:
+            QMessageBox.warning(self, "Error",
+                                "Formato de ingredientes incorrecto.\n\n"
+                                "Cada línea debe tener:\n"
+                                "cantidad unidad nombre\n\n"
+                                "Ejemplo: '200 g harina'"
+                                )
+            self.listaIngredientes.setFocus()
+            return False
+
+        if not procedimiento:
+            QMessageBox.warning(self, "Error", "El procedimiento es obligatorio")
+            self.procedimiento.setFocus()
+            return False
+
+        if len(procedimiento) < 10:
+            QMessageBox.warning(self, "Error", "El procedimiento debe tener al menos 10 caracteres")
+            self.procedimiento.setFocus()
+            return False
+
+        return True
 
     def confirmar_eliminar(self):
         from confirm_dialog import ConfirmDialog
@@ -92,7 +148,7 @@ class PaginaAgregarReceta(QMainWindow):
             'rama': 'RAMAS', 'ramas': 'RAMAS'
         }
 
-        return unidades_map.get(unidad, unidad.upper())  # Si no está en el mapa, convierte a MAYÚSCULAS
+        return unidades_map.get(unidad, unidad.upper())
 
     def parsear_ingredientes(self, texto_ingredientes):
         lineas = texto_ingredientes.split('\n')
@@ -116,8 +172,12 @@ class PaginaAgregarReceta(QMainWindow):
                     unidad_original = partes[1]
                     nombre_ing = ' '.join(partes[2:])
 
+                # Validar que el nombre del ingrediente no esté vacío
+                if not nombre_ing.strip():
+                    print(f"Línea ignorada (nombre de ingrediente vacío): {linea}")
+                    continue
+
                 unidad_normalizada = self.normalizar_unidad(unidad_original)
-                # Convertir nombre del ingrediente a MAYÚSCULAS
                 nombre_ing = nombre_ing.upper().strip()
 
                 ingredientes.append((cantidad, nombre_ing, unidad_normalizada))
@@ -138,29 +198,17 @@ class PaginaAgregarReceta(QMainWindow):
             nombre = self.nombreReceta.text().strip().upper()
 
             categoria_val = self.categorias.value()
-            categoria = "DULCE" if categoria_val == 0 else "SALADO"  # Ya está en mayúsculas
+            categoria = "DULCE" if categoria_val == 0 else "SALADO"
 
             ingredientes_texto = self.listaIngredientes.toPlainText().strip()
             procedimiento = self.procedimiento.toPlainText().strip().upper()
 
-            if not nombre:
-                QMessageBox.warning(self, "Error", "El nombre de la receta es obligatorio")
-                self.nombreReceta.setFocus()
-                return
-
-            if not ingredientes_texto:
-                QMessageBox.warning(self, "Error", "Debes ingresar al menos un ingrediente")
-                self.listaIngredientes.setFocus()
-                return
-
-            receta = Receta(self.db, nombre, categoria, procedimiento)
-
-            # Parsear y agregar ingredientes (ya se convierten a mayúsculas en parsear_ingredientes)
+            # Parsear y agregar ingredientes
             ingredientes_parseados = self.parsear_ingredientes(ingredientes_texto)
             if not ingredientes_parseados:
                 QMessageBox.warning(self, "Error",
                                     "No se pudieron procesar los ingredientes.\n\n"
-                                    "Formato esperado por línea:\n"
+                                    "Asegúrate de que cada línea tenga el formato:\n"
                                     "'cantidad unidad nombre'\n\n"
                                     "Ejemplos:\n"
                                     "200 g harina\n"
@@ -171,8 +219,10 @@ class PaginaAgregarReceta(QMainWindow):
                                     )
                 return
 
+            receta = Receta(self.db, nombre, categoria, procedimiento)
+
             for cantidad, nombre_ing, unidad in ingredientes_parseados:
-                ingrediente = Ingrediente(self.db, nombre_ing, unidad)  # Ya en mayúsculas
+                ingrediente = Ingrediente(self.db, nombre_ing, unidad)
                 receta.agregar_ingrediente(ingrediente, cantidad)
 
             # Guardar receta
