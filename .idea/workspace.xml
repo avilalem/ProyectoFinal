@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 3.0">
-      <change beforePath="$PROJECT_DIR$/navigation.py" beforeDir="false" afterPath="$PROJECT_DIR$/navigation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_agregar_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_agregar_receta.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_lista.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_lista.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_lista_compras.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_lista_compras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_receta.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RecetarioDigital.spec" beforeDir="false" afterPath="$PROJECT_DIR$/RecetarioDigital.spec" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,30 +90,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762220580259</updated>
-    </task>
-    <task id="LOCAL-00016" summary="6/11 @ 17:32">
-      <option name="closed" value="true" />
-      <created>1762471916515</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1762471916515</updated>
-    </task>
-    <task id="LOCAL-00017" summary="6/11 @ 17:47">
-      <option name="closed" value="true" />
-      <created>1762472855135</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1762472855135</updated>
-    </task>
-    <task id="LOCAL-00018" summary="6/11 @ 17:57">
-      <option name="closed" value="true" />
-      <created>1762473440389</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1762473440389</updated>
     </task>
     <task id="LOCAL-00019" summary="6/11 @ 18:08">
       <option name="closed" value="true" />
@@ -486,7 +459,31 @@
       <option name="project" value="LOCAL" />
       <updated>1762745586734</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Version 3.0">
+      <option name="closed" value="true" />
+      <created>1762746133110</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1762746133110</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Version 3.0">
+      <option name="closed" value="true" />
+      <created>1762746140997</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1762746140997</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Version 3.0">
+      <option name="closed" value="true" />
+      <created>1762746197217</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1762746197217</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -513,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="6/11 @ 21:30" />
     <MESSAGE value="6/11 @ 21:35" />
     <MESSAGE value="6/11 @ 21:42" />
     <MESSAGE value="6/11 @ 22:30" />
