@@ -241,8 +241,12 @@ class PaginaListaCompras(QMainWindow):
         try:
             from reportlab.pdfgen import canvas
             from reportlab.lib.pagesizes import letter
+            import os  # AGREGAR ESTA IMPORTACIÓN
 
-            nombre_archivo = "lista_compras_final.pdf"
+            # GUARDAR EN ESCRITORIO
+            desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+            nombre_archivo = os.path.join(desktop_path, "lista_compras_final.pdf")
+
             c = canvas.Canvas(nombre_archivo, pagesize=letter)
             c.setFont("Helvetica-Bold", 14)
 
@@ -295,10 +299,9 @@ class PaginaListaCompras(QMainWindow):
             QMessageBox.information(
                 self,
                 "PDF Generado",
-                f"Lista de compras guardada como:\n{nombre_archivo}\n\n"
+                f"Lista de compras guardada en el escritorio como:\n{nombre_archivo}\n\n"
                 f"Recetas: {len(recetas_seleccionadas)}\n"
-                f"Ingredientes: {len(ingredientes_seleccionados)}\n"
-                f"El archivo se encuentra en la carpeta de la aplicación."
+                f"Ingredientes: {len(ingredientes_seleccionados)}"
             )
 
         except ImportError:
