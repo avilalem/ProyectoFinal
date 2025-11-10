@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.13">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_lista.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_lista.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagina_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_receta.py" afterDir="false" />
-    </list>
+    <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.15" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,14 +86,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1762220580259</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Version 2.3">
-      <option name="closed" value="true" />
-      <created>1762385602193</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1762385602193</updated>
     </task>
     <task id="LOCAL-00011" summary="Version 2.3">
       <option name="closed" value="true" />
@@ -483,7 +471,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762743211622</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Version 2.15">
+      <option name="closed" value="true" />
+      <created>1762743974829</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1762743974829</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Version 2.4" />
     <MESSAGE value="6/11 @ 19:12" />
     <MESSAGE value="6/11 @ 19:16" />
     <MESSAGE value="6/11 @ 19:19" />
@@ -539,6 +534,7 @@
     <MESSAGE value="9/11 20:35" />
     <MESSAGE value="9/11 20:40" />
     <MESSAGE value="9/11 20:53" />
-    <option name="LAST_COMMIT_MESSAGE" value="9/11 20:53" />
+    <MESSAGE value="Version 2.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 2.15" />
   </component>
 </project>

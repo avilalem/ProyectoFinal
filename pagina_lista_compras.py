@@ -145,9 +145,6 @@ class PaginaListaCompras(QMainWindow):
         elif unidad in ['LIBRAS', 'LB', 'LBS']:
             if cantidad < 1:
                 return round(cantidad * 16, 2), 'oz'
-                Convertir
-                a
-                onzas
             else:
                 return round(cantidad, 2), 'lb'
 
