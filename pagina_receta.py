@@ -5,6 +5,7 @@ from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from navigation import NavigationManager
 from models import Receta, Ingrediente, ListaCompras
+from message_dialog import MessageDialog
 
 
 class PaginaReceta(QMainWindow):
@@ -23,27 +24,38 @@ class PaginaReceta(QMainWindow):
             self.close()
             return
 
-        # Configurar elementos de la interfaz
         self._configurar_titulo()
         self.listaIngredientes.setPlainText(self.obtener_ingredientes_texto(1.0))
         self.textProcedimiento.setPlainText(self.receta.instrucciones)
         self.lineCantidad.setText("1")
 
-        # Inicializar lista de compras
         self.lista_compras = ListaCompras(self.db)
 
-        # Conectar señales - SOLO LOS BOTONES QUE EXISTEN
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonEditar.clicked.connect(self.abrir_editar)
         self.botonCarritoCompras.clicked.connect(self.agregar_a_lista_compras)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.lineCantidad.textChanged.connect(self.actualizar_ingredientes)
         self.botonRegresar.clicked.connect(self.regresar)
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+
 
         if hasattr(self, 'botonInfo'):
             self.botonInfo.clicked.connect(lambda: self.open_info("receta_general"))
 
         self.actualizar_botones_administrador()
+
+    def cerrar_sesion(self):
+        if self.nav.es_administrador:
+            self.nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
     def _configurar_titulo(self):
         posibles_labels = ['labelTitulo', 'tituloLabel', 'lblTitulo', 'Titulo']

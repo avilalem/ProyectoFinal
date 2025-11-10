@@ -91,14 +91,6 @@
       <option name="presentableId" value="Default" />
       <updated>1762220580259</updated>
     </task>
-    <task id="LOCAL-00008" summary="Version 2.3">
-      <option name="closed" value="true" />
-      <created>1762385383133</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1762385383133</updated>
-    </task>
     <task id="LOCAL-00009" summary="Version 2.3">
       <option name="closed" value="true" />
       <created>1762385482966</created>
@@ -483,7 +475,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762742152725</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="9/11 20:40">
+      <option name="closed" value="true" />
+      <created>1762742455460</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1762742455460</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -510,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Version 2.4" />
     <MESSAGE value="6/11 @ 19:12" />
     <MESSAGE value="6/11 @ 19:16" />
     <MESSAGE value="6/11 @ 19:19" />
@@ -537,6 +536,7 @@
     <MESSAGE value="9/11 18:48" />
     <MESSAGE value="9/11 20:05" />
     <MESSAGE value="9/11 20:35" />
-    <option name="LAST_COMMIT_MESSAGE" value="9/11 20:35" />
+    <MESSAGE value="9/11 20:40" />
+    <option name="LAST_COMMIT_MESSAGE" value="9/11 20:40" />
   </component>
 </project>

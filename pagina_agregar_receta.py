@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QMainWindow, QApplication, QMessageBox,QComboBox
 from database import SQLiteDatabase
 from models import Receta, Ingrediente
 from navigation import NavigationManager
+from message_dialog import MessageDialog
 
 
 class PaginaAgregarReceta(QMainWindow):
@@ -20,10 +21,23 @@ class PaginaAgregarReceta(QMainWindow):
         self.botonGuardar.clicked.connect(self.confirmar_guardar)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar)
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         categoria = ["DULCE", "SALADO"]
 
         self.comboCategoria.addItems(categoria)
         self.nombreReceta.setFocus()
+
+    def cerrar_sesion(self):
+        if self.nav.es_administrador:
+            self.nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog

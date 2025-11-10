@@ -5,6 +5,7 @@ from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from navigation import NavigationManager
 from models import ListaCompras
+from message_dialog import MessageDialog
 
 
 class PaginaListaCompras(QMainWindow):
@@ -209,4 +210,16 @@ class PaginaListaCompras(QMainWindow):
         for boton_name in botones_admin:
             if hasattr(self, boton_name):
                 getattr(self, boton_name).setVisible(es_admin)
+
+    def cerrar_sesion(self):
+        if self.nav.es_administrador:
+            self.nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
 

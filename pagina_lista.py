@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from models import Receta, Ingrediente
 from navigation import NavigationManager
+from message_dialog import MessageDialog
 
 
 class PaginaLista(QMainWindow):
@@ -16,23 +17,19 @@ class PaginaLista(QMainWindow):
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
 
-        # Configurar radio buttons
         self.radio_group = QButtonGroup(self)
         self.radio_group.addButton(self.botonDulce)
         self.radio_group.addButton(self.botonSalado)
         self.radio_group.addButton(self.botonTodo)
         self.botonTodo.setChecked(True)
         self.radio_group.buttonToggled.connect(self.on_radio_toggled)
-
-        # Conectar señales
+        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
 
-        # CONEXIÓN PARA DOBLE CLICK CON DEPURACIÓN
         self.listaRecetas.itemDoubleClicked.connect(self.abrir_receta)
-        print("✅ Conexión de doble click establecida")
 
         self.actualizar_botones_administrador()
         self.mostrar_recetas(self.recetas)
@@ -155,3 +152,15 @@ class PaginaLista(QMainWindow):
                 getattr(self, boton_name).setVisible(es_admin)
 
         print(f"Modo administrador: {es_admin}")
+
+    def cerrar_sesion(self):
+        if self.nav.es_administrador:
+            self.nav.logout_administrador()
+            dlg = MessageDialog(self,
+                                title="Sesión Cerrada",
+                                text="Sesión de administrador cerrada correctamente",
+                                editable=False)
+            dlg.exec()
+
+            from pagina_principal import PaginaPrincipal
+            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
