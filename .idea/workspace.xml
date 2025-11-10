@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc952bb-1872-453b-8292-a2f7e9580638" name="Changes" comment="Version 2.13">
-      <change beforePath="$PROJECT_DIR$/recetario.db" beforeDir="false" afterPath="$PROJECT_DIR$/recetario.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pagina_lista.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_lista.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pagina_receta.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagina_receta.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -508,6 +510,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="6/11 @ 18:30" />
+    <MESSAGE value="Version 2.4" />
     <MESSAGE value="Version 2.4" />
     <MESSAGE value="6/11 @ 19:12" />
     <MESSAGE value="6/11 @ 19:16" />
