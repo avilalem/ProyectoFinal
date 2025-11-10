@@ -21,15 +21,17 @@ class PaginaListaCompras(QMainWindow):
             self.lista_compras = lista_compras
 
         self.borrarTodo.clicked.connect(self.borrar_lista)
-        self.guardarLista.clicked.connect(self.generar_pdf)  # ¡CORREGIDO! guardarLista genera PDF
+        self.guardarLista.clicked.connect(self.generar_pdf)
         self.selectTodo.clicked.connect(self.marcar_todo)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista_compras"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
-
         self.actualizar_botones_administrador()
         self.cargar_lista_compras()
+        self.cargar_lista_recetas()
+        self.listaRecetas.itemChanged.connect(self.seleccion_recetas)
+        self.listaCompras.itemChanged.conncet(self.seleccion_ingredientes)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -50,7 +52,7 @@ class PaginaListaCompras(QMainWindow):
 
         if self.lista_compras.esta_vacia():
             item = QListWidgetItem("La lista de compras está vacía")
-            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsUserCheckable)  # No checkeable
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsUserCheckable)
             self.listaCompras.addItem(item)
             return
 
@@ -62,7 +64,7 @@ class PaginaListaCompras(QMainWindow):
 
             item_text = f"{cantidad_str} {unidad} de {nombre}"
             item = QListWidgetItem(item_text)
-            item.setCheckState(Qt.CheckState.Unchecked)  # No marcado por defecto
+            item.setCheckState(Qt.CheckState.Unchecked)
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
             self.listaCompras.addItem(item)
 
