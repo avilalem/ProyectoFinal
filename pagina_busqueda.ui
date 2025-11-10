@@ -606,25 +606,6 @@ QPushButton:pressed {
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <widget class="QLineEdit" name="cajaBusqueda">
-          <property name="geometry">
-           <rect>
-            <x>240</x>
-            <y>170</y>
-            <width>281</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>36</height>
-           </size>
-          </property>
-          <property name="placeholderText">
-           <string>Buscar Recetas...</string>
-          </property>
-         </widget>
          <widget class="QTextEdit" name="textEdit">
           <property name="geometry">
            <rect>
@@ -658,6 +639,9 @@ QPushButton:pressed {
            </rect>
           </property>
          </widget>
+         <zorder>resultadosLista</zorder>
+         <zorder>textEdit</zorder>
+         <zorder>botonTodas</zorder>
         </widget>
        </item>
        <item>

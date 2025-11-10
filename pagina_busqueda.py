@@ -14,7 +14,7 @@ class PaginaBusqueda(QMainWindow):
         self.db = SQLiteDatabase()
         self.controlador = controlador
         self.nav = NavigationManager.get_instance()
-        self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
+
         self.resultadosLista.itemDoubleClicked.connect(self.abrir_editar_receta)  # CAMBIADO A DoubleClicked
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.recetas = Receta.obtener_todas(self.db)
@@ -43,18 +43,9 @@ class PaginaBusqueda(QMainWindow):
         )
         dlg.exec()
 
-    def buscar_recetas(self):
-        texto = self.cajaBusqueda.text().strip().lower()
 
-        if texto == "":
-            coincidencias = self.recetas
-        else:
-            coincidencias = [
-                receta for receta in self.recetas
-                if texto in receta.nombre.lower()
-            ]
 
-        self.actualizar_lista(coincidencias)
+
 
     def actualizar_lista(self, lista_recetas):
         self.resultadosLista.clear()

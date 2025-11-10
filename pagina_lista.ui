@@ -577,6 +577,25 @@ border-radius:25px;
            </size>
           </property>
          </widget>
+         <widget class="QLineEdit" name="cajaBusqueda">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>10</y>
+            <width>281</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>36</height>
+           </size>
+          </property>
+          <property name="placeholderText">
+           <string>Buscar Recetas...</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>

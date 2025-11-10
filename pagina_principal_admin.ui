@@ -600,24 +600,18 @@ QPushButton:pressed {
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <widget class="QPushButton" name="botonBuscar">
-          <property name="geometry">
-           <rect>
-            <x>380</x>
-            <y>130</y>
-            <width>177</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="botonAgregar">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
     background-color: rgb(230, 150, 150);   
     color: rgb(255, 255, 255);              
     border-radius: 20px;
@@ -635,29 +629,23 @@ QPushButton:pressed {
     background-color: rgb(220, 120, 120);
 }
 </string>
-          </property>
-          <property name="text">
-           <string>Buscar Receta</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="botonVer">
-          <property name="geometry">
-           <rect>
-            <x>220</x>
-            <y>260</y>
-            <width>251</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+            </property>
+            <property name="text">
+             <string>Agregar Receta</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="botonVer">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
     background-color: rgb(230, 150, 150);   
     color: rgb(255, 255, 255);              
     border-radius: 20px;
@@ -675,51 +663,13 @@ QPushButton:pressed {
     background-color: rgb(220, 120, 120);
 }
 </string>
-          </property>
-          <property name="text">
-           <string>Ver Lista de Recetas</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="botonAgregar">
-          <property name="geometry">
-           <rect>
-            <x>150</x>
-            <y>130</y>
-            <width>190</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: rgb(230, 150, 150);   
-    color: rgb(255, 255, 255);              
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-weight: bold;
-    border: none;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-QPushButton:hover {
-    background-color: rgb(240, 130, 130);
-}
-
-QPushButton:pressed {
-    background-color: rgb(220, 120, 120);
-}
-</string>
-          </property>
-          <property name="text">
-           <string>Agregar Receta</string>
-          </property>
-         </widget>
+            </property>
+            <property name="text">
+             <string>Ver Lista de Recetas</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

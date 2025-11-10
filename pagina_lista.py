@@ -24,9 +24,21 @@ class PaginaLista(QMainWindow):
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
-        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+        self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
+
         self.actualizar_botones_administrador()
         self.mostrar_recetas(self.recetas)
+    def buscar_recetas(self):
+        texto = self.cajaBusqueda.text().strip().lower()
+
+        if texto == "":
+            coincidencias = self.recetas
+        else:
+            coincidencias = [
+                receta for receta in self.recetas
+                if texto in receta.nombre.lower()
+            ]
+        self.actualizar_lista(coincidencias)
 
     def on_radio_toggled(self, button, checked):
         if checked:
