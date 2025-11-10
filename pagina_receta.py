@@ -91,42 +91,58 @@ class PaginaReceta(QMainWindow):
                 QMessageBox.warning(self, "Error", "El multiplicador debe ser mayor que 0")
                 return
 
-            # Crear una copia temporal de la receta con el multiplicador
-            receta_con_multiplicador = {
-                'receta': self.receta,
-                'multiplicador': multiplicador,
-                'ingredientes_ajustados': []
-            }
-
-            # Calcular ingredientes ajustados
-            for ingrediente, cantidad in self.receta.ingredientes:
-                cantidad_ajustada = cantidad * multiplicador
-                receta_con_multiplicador['ingredientes_ajustados'].append({
-                    'ingrediente': ingrediente,
-                    'cantidad': cantidad_ajustada
-                })
-
-            # Agregar a la lista global
+            # Inicializar lista de recetas si no existe
             if not hasattr(self.lista_compras_global, 'recetas_agregadas'):
                 self.lista_compras_global.recetas_agregadas = []
 
-            # Evitar duplicados
-            receta_existente = False
-            for receta_guardada in self.lista_compras_global.recetas_agregadas:
-                if (receta_guardada['receta'].id == self.receta.id and
-                        receta_guardada['multiplicador'] == multiplicador):
-                    receta_existente = True
+            # Buscar si ya existe la receta
+            receta_existente = None
+            for i, receta_guardada in enumerate(self.lista_compras_global.recetas_agregadas):
+                if receta_guardada['receta'].id == self.receta.id:
+                    receta_existente = i
                     break
 
-            if not receta_existente:
+            if receta_existente is not None:
+                # Si ya existe, SUMAR el multiplicador
+                receta_actual = self.lista_compras_global.recetas_agregadas[receta_existente]
+                nuevo_multiplicador = receta_actual['multiplicador'] + multiplicador
+
+                # Actualizar la receta existente
+                self.lista_compras_global.recetas_agregadas[receta_existente]['multiplicador'] = nuevo_multiplicador
+
+                # Recalcular ingredientes ajustados
+                nuevos_ingredientes = []
+                for ingrediente, cantidad in self.receta.ingredientes:
+                    cantidad_ajustada = cantidad * nuevo_multiplicador
+                    nuevos_ingredientes.append({
+                        'ingrediente': ingrediente,
+                        'cantidad': cantidad_ajustada
+                    })
+                self.lista_compras_global.recetas_agregadas[receta_existente][
+                    'ingredientes_ajustados'] = nuevos_ingredientes
+
+                mensaje = f"✅ '{self.receta.nombre}' actualizada (x{nuevo_multiplicador})"
+            else:
+                # Si no existe, crear nueva entrada
+                receta_con_multiplicador = {
+                    'receta': self.receta,
+                    'multiplicador': multiplicador,
+                    'ingredientes_ajustados': []
+                }
+
+                # Calcular ingredientes ajustados
+                for ingrediente, cantidad in self.receta.ingredientes:
+                    cantidad_ajustada = cantidad * multiplicador
+                    receta_con_multiplicador['ingredientes_ajustados'].append({
+                        'ingrediente': ingrediente,
+                        'cantidad': cantidad_ajustada
+                    })
+
                 self.lista_compras_global.recetas_agregadas.append(receta_con_multiplicador)
+                mensaje = f"✅ '{self.receta.nombre}' agregada a lista de compras (x{multiplicador})"
 
-            # Agregar ingredientes a la lista de compras
-            for ingrediente, cantidad in self.receta.ingredientes:
-                cantidad_ajustada = cantidad * multiplicador
-                self.lista_compras_global._agregar_ingrediente(ingrediente, cantidad_ajustada)
-
-            mensaje = f"✅ '{self.receta.nombre}' agregada a lista de compras (x{multiplicador})"
+            # ACTUALIZAR LA LISTA DE INGREDIENTES GLOBAL
+            self.actualizar_ingredientes_globales()
 
             if redirigir:
                 mensaje += "\n\nRedirigiendo al carrito..."
@@ -137,6 +153,19 @@ class PaginaReceta(QMainWindow):
 
         except ValueError:
             QMessageBox.warning(self, "Error", "Por favor ingresa un número válido para la cantidad")
+
+    def actualizar_ingredientes_globales(self):
+        """Actualiza la lista global de ingredientes sumando todas las recetas"""
+        # Limpiar ingredientes actuales
+        self.lista_compras_global.items.clear()
+
+        # Sumar ingredientes de todas las recetas
+        if hasattr(self.lista_compras_global, 'recetas_agregadas'):
+            for receta_data in self.lista_compras_global.recetas_agregadas:
+                for ingrediente_data in receta_data['ingredientes_ajustados']:
+                    ingrediente = ingrediente_data['ingrediente']
+                    cantidad = ingrediente_data['cantidad']
+                    self.lista_compras_global._agregar_ingrediente(ingrediente, cantidad)
 
     def abrir_lista_compras(self):
         """Abre la página de lista de compras"""
