@@ -16,7 +16,6 @@ class PaginaReceta(QMainWindow):
         self.receta_id = receta_id
         self.controlador = controlador
 
-        # Cargar la receta
         self.receta = Receta.obtener_por_id(self.db, self.receta_id)
 
         if not self.receta:
@@ -41,22 +40,17 @@ class PaginaReceta(QMainWindow):
         self.lineCantidad.textChanged.connect(self.actualizar_ingredientes)
         self.botonRegresar.clicked.connect(self.regresar)
 
-        # Botones opcionales - solo conectar si existen
         if hasattr(self, 'botonInfo'):
             self.botonInfo.clicked.connect(lambda: self.open_info("receta_general"))
 
         self.actualizar_botones_administrador()
 
     def _configurar_titulo(self):
-        """Configura el título de la receta en la interfaz"""
-        # Buscar cualquier QLabel que pueda servir para el título
         posibles_labels = ['labelTitulo', 'tituloLabel', 'lblTitulo', 'Titulo']
         for label_name in posibles_labels:
             if hasattr(self, label_name):
                 getattr(self, label_name).setText(self.receta.nombre)
                 return
-
-        # Si no se encuentra, usar el window title
         self.setWindowTitle(f"Receta: {self.receta.nombre}")
 
     def confirmar_salida(self):
@@ -70,11 +64,9 @@ class PaginaReceta(QMainWindow):
         dlg.exec()
 
     def obtener_ingredientes_texto(self, multiplicador: float = 1.0):
-        """Genera texto formateado con los ingredientes ajustados por el multiplicador"""
         texto = ""
         for ingrediente, cantidad in self.receta.ingredientes:
             cantidad_ajustada = cantidad * multiplicador
-            # Formatear cantidad para mostrar decimales solo si son necesarios
             if cantidad_ajustada.is_integer():
                 cantidad_str = str(int(cantidad_ajustada))
             else:
@@ -84,7 +76,6 @@ class PaginaReceta(QMainWindow):
         return texto
 
     def actualizar_ingredientes(self):
-        """Actualiza los ingredientes en tiempo real según el multiplicador"""
         try:
             factor_text = self.lineCantidad.text().strip()
             if not factor_text:
@@ -98,12 +89,10 @@ class PaginaReceta(QMainWindow):
         except ValueError:
             factor = 1.0
 
-        # Actualizar el QTextEdit con los ingredientes ajustados
         texto_ingredientes = self.obtener_ingredientes_texto(factor)
         self.listaIngredientes.setPlainText(texto_ingredientes)
 
     def agregar_a_lista_compras(self):
-        """Agrega la receta actual a la lista de compras con el multiplicador actual"""
         try:
             factor_text = self.lineCantidad.text().strip()
             if not factor_text:
@@ -115,7 +104,6 @@ class PaginaReceta(QMainWindow):
                 QMessageBox.warning(self, "Error", "El multiplicador debe ser mayor que 0")
                 return
 
-            # Agregar cada ingrediente a la lista de compras
             for ingrediente, cantidad in self.receta.ingredientes:
                 cantidad_ajustada = cantidad * multiplicador
                 self.lista_compras._agregar_ingrediente(ingrediente, cantidad_ajustada)
@@ -193,11 +181,6 @@ class PaginaReceta(QMainWindow):
             msg = (
                 "Aquí puedes ajustar la cantidad de porciones.\n"
                 "Por ejemplo, si escribes '2', se duplicarán los ingredientes."
-            )
-        elif page_key == "receta_metricas":
-            msg = (
-                "Las unidades métricas indican en qué medida se expresan los ingredientes.\n"
-                "Ejemplo: gramos, mililitros, cucharadas, etc."
             )
         else:
             msg = "Ayuda general para esta sección."
