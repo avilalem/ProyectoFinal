@@ -44,8 +44,8 @@ class PaginaListaCompras(QMainWindow):
         dlg.exec()
 
     def regresar_a_busqueda(self):
-        from pagina_busqueda import PaginaBusqueda
-        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
+        from pagina_lista import PaginaLista
+        self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def cargar_lista_compras(self):
         self.listaCompras.clear()

@@ -202,9 +202,9 @@ class PaginaEditarReceta(QMainWindow):
             QMessageBox.information(self, "Información", "Cambios descartados")
 
     def volver(self):
-        from pagina_busqueda import PaginaBusqueda
-        ventana_busqueda = PaginaBusqueda(self.controlador)
-        self.controlador.mostrar(ventana_busqueda)
+        from pagina_receta import PaginaReceta
+        ventana_receta = PaginaReceta(self.controlador, receta_id=self.receta_id)
+        self.controlador.mostrar(ventana_receta)
 
     def cerrar_sesion(self):
         from navigation import NavigationManager

@@ -132,7 +132,6 @@ class PaginaReceta(QMainWindow):
             QMessageBox.warning(self, "Error", "Por favor ingresa un número válido para la cantidad")
 
     def abrir_editar(self):
-        """Abre la página de edición de receta (solo administrador)"""
         if not self.nav.es_administrador:
             QMessageBox.warning(self, "Acceso denegado", "Solo los administradores pueden editar recetas")
             return
@@ -142,7 +141,6 @@ class PaginaReceta(QMainWindow):
         self.controlador.mostrar(ventana_editar)
 
     def confirmar_eliminar(self):
-        """Elimina la receta con confirmación (solo administrador)"""
         if not self.nav.es_administrador:
             QMessageBox.warning(self, "Acceso denegado", "Solo los administradores pueden eliminar recetas")
             return
@@ -176,7 +174,6 @@ class PaginaReceta(QMainWindow):
         nav = NavigationManager.get_instance()
         es_admin = nav.es_administrador
 
-        # SOLO LOS BOTONES QUE MENCIONASTE
         botones_admin = ['botonEditar', 'botonEliminar', 'botonCerrarS']
         for boton_name in botones_admin:
             if hasattr(self, boton_name):
