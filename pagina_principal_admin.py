@@ -17,7 +17,7 @@ class PaginaAdmin(QMainWindow):
         self.botonAgregar.clicked.connect(self.agregar_receta)
         self.botonInfo.clicked.connect(lambda: self.open_info("admin"))
         self.botonSalir.clicked.connect(self.confirmar_salida)
-        self.boton
+        self.botonVer.clicked.connect(self.lista_receta)
 
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
@@ -49,10 +49,10 @@ class PaginaAdmin(QMainWindow):
         from pagina_agregar_receta import PaginaAgregarReceta
         self.nav.mostrar("agregar_receta", PaginaAgregarReceta, self.controlador)
 
-    def buscar_receta(self):
-        print("Abriendo PaginaBusqueda")
-        from pagina_busqueda import PaginaBusqueda
-        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
+    def lista_receta(self):
+        print("Abriendo PaginaLista")
+        from pagina_lista import PaginaLista
+        self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def cerrar_sesion(self):
         if self.nav.es_administrador:
