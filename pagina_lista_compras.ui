@@ -14,6 +14,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <property name="spacing">
      <number>0</number>
@@ -39,6 +45,7 @@ color: rgb(176, 131, 63);
 }
 QPushButton{
 background-color:#000000ff;
+color: rgb(176, 131, 63);
 border-radius:25px;
 }
 QPushButton:hover{
@@ -52,7 +59,7 @@ border-radius:25px;
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8,1">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,2,1,5,1">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -69,21 +76,7 @@ border-radius:25px;
         <number>0</number>
        </property>
        <item>
-        <widget class="QFrame" name="frameTitulo">
-         <property name="styleSheet">
-          <string notr="true">QFrame{
-background-color: rgb(247, 247, 233) ;
-color: rgb(176, 131, 63);
-}
-QPushButton{
-background-color:#000000ff;
-border-radius:25px;
-}
-QPushButton:hover{
-background-color:rgb(230, 225, 210);
-border-radius:25px;
-}</string>
-         </property>
+        <widget class="QFrame" name="frame_2">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -110,13 +103,13 @@ border-radius:25px;
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>icono-salir.png</normaloff>icono-salir.png</iconset>
+            <normaloff>../../PycharmProjects/ProyectoFinal/icono-salir.png</normaloff>../../PycharmProjects/ProyectoFinal/icono-salir.png</iconset>
           </property>
          </widget>
          <widget class="QPushButton" name="botonRegresar">
           <property name="geometry">
            <rect>
-            <x>690</x>
+            <x>680</x>
             <y>0</y>
             <width>51</width>
             <height>51</height>
@@ -133,7 +126,7 @@ border-radius:25px;
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>icono-atras.png</normaloff>icono-atras.png</iconset>
+            <normaloff>../../PycharmProjects/ProyectoFinal/icono-atras.png</normaloff>../../PycharmProjects/ProyectoFinal/icono-atras.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -142,45 +135,14 @@ border-radius:25px;
            </size>
           </property>
          </widget>
-         <widget class="QLabel" name="Titulo">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>311</width>
-            <height>41</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>22</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
         </widget>
        </item>
        <item>
         <widget class="QFrame" name="frame_3">
-         <property name="styleSheet">
-          <string notr="true">QFrame{ background-color: rgb(247, 247, 233) ; }
-QRadioButton {
-    color: rgb(200, 160, 100);      
-}
-
-QRadioButton::indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    border: 2px solid rgb(230, 150, 150);
-    background-color: rgb(255, 255, 255);
-}
-
-QRadioButton::indicator:checked {
-    border: 2px solid rgb(220, 100, 100);
-}</string>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -188,163 +150,151 @@ QRadioButton::indicator:checked {
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="9">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QFrame" name="frameReceta">
+           <widget class="QListWidget" name="listaRecetas">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContents</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+            <property name="spacing">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="botonCambiosLista">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="styleSheet">
-             <string notr="true">QFrame{
-background-color: rgb(247, 247, 233) ;
-color: rgb(176, 131, 63);
+             <string notr="true">QPushButton {
+    background-color: rgb(230, 150, 150);   
+    color: rgb(255, 255, 255);              
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
-QPushButton{
-background-color:#000000ff;
-color: rgb(176, 131, 63);
-border-radius:25px;
+
+QPushButton:hover {
+    background-color: rgb(240, 130, 130);
 }
-QPushButton:hover{
-background-color:rgb(230, 225, 210);
-border-radius:25px;
-}</string>
+
+QPushButton:pressed {
+    background-color: rgb(220, 120, 120);
+}
+</string>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+            <property name="text">
+             <string>Actualizar Lista</string>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QPushButton" name="selectTodo">
-             <property name="geometry">
-              <rect>
-               <x>20</x>
-               <y>10</y>
-               <width>191</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QFrame{
-background-color: rgb(247, 247, 233) ;
-}
-QPushButton{
-background-color:#000000ff;
-border-radius:25px;
-}
-QPushButton:hover{
-background-color:rgb(230, 225, 210);
-border-radius:25px;
-}</string>
-             </property>
-             <property name="text">
-              <string>Seleccionar Todos</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="borrarTodo">
-             <property name="geometry">
-              <rect>
-               <x>230</x>
-               <y>10</y>
-               <width>181</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QFrame{
-background-color: rgb(247, 247, 233) ;
-}
-QPushButton{
-background-color:#000000ff;
-border-radius:25px;
-}
-QPushButton:hover{
-background-color:rgb(230, 225, 210);
-border-radius:25px;
-}</string>
-             </property>
-             <property name="text">
-              <string>Borrar Todo</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="guardarLista">
-             <property name="geometry">
-              <rect>
-               <x>390</x>
-               <y>10</y>
-               <width>181</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QFrame{
-background-color: rgb(247, 247, 233) ;
-}
-QPushButton{
-background-color:#000000ff;
-border-radius:25px;
-}
-QPushButton:hover{
-background-color:rgb(230, 225, 210);
-border-radius:25px;
-}</string>
-             </property>
-             <property name="text">
-              <string>Guardar Lista</string>
-             </property>
-            </widget>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frameLista">
-         <property name="styleSheet">
-          <string notr="true">QFrame{ background-color: rgb(247, 247, 233) ; }
-QRadioButton {
-    color: rgb(200, 160, 100);      
-}
-
-QRadioButton::indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    border: 2px solid rgb(230, 150, 150);
-    background-color: rgb(255, 255, 255);
-}
-
-QRadioButton::indicator:checked {
-    border: 2px solid rgb(220, 100, 100);
-}</string>
+        <widget class="QFrame" name="frame_4">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="selectTodo">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QFrame{
+background-color: rgb(247, 247, 233) ;
+}
+QPushButton{
+background-color:#000000ff;
+border-radius:25px;
+}
+QPushButton:hover{
+background-color:rgb(230, 225, 210);
+border-radius:25px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Seleccionar Todos</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="borrarTodo">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QFrame{
+background-color: rgb(247, 247, 233) ;
+}
+QPushButton{
+background-color:#000000ff;
+border-radius:25px;
+}
+QPushButton:hover{
+background-color:rgb(230, 225, 210);
+border-radius:25px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Borrar Todo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="guardarLista">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QFrame{
+background-color: rgb(247, 247, 233) ;
+}
+QPushButton{
+background-color:#000000ff;
+border-radius:25px;
+}
+QPushButton:hover{
+background-color:rgb(230, 225, 210);
+border-radius:25px;
+}</string>
+            </property>
+            <property name="text">
+             <string>Guardar Lista</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_5">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -374,35 +324,35 @@ QRadioButton::indicator:checked {
         </widget>
        </item>
        <item>
-        <widget class="QFrame" name="frameInfo">
-         <property name="styleSheet">
-          <string notr="true">QFrame {
-    background-color: rgb(247, 247, 233);
-}
-QPushButton {
-    background-color: rgb(247, 247, 233);  
-    color: rgb(200, 160, 100);                 
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-weight: bold;
-    border: 1px solid rgb(210, 200, 180);  
-}
-
-QPushButton:hover {
-    background-color: rgb(240, 235, 220);  
-	color: rgb(230, 225, 210);
-}
-
-QPushButton:pressed {
-    background-color: rgb(220, 215, 200);  
-}</string>
-         </property>
+        <widget class="QFrame" name="frame_6">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <widget class="QPushButton" name="botonCerrarS">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>10</y>
+            <width>241</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Cerrar Sesión</string>
+          </property>
+         </widget>
          <widget class="QPushButton" name="botonInfo">
           <property name="geometry">
            <rect>
@@ -436,29 +386,13 @@ border-radius:25px;
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>icono-informacion.png</normaloff>icono-informacion.png</iconset>
+            <normaloff>../../PycharmProjects/ProyectoFinal/icono-informacion.png</normaloff>../../PycharmProjects/ProyectoFinal/icono-informacion.png</iconset>
           </property>
-         </widget>
-         <widget class="QPushButton" name="botonCerrarS">
-          <property name="geometry">
-           <rect>
-            <x>310</x>
-            <y>10</y>
-            <width>241</width>
-            <height>41</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Cerrar Sesión</string>
+          <property name="iconSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
           </property>
          </widget>
         </widget>
