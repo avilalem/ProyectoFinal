@@ -171,18 +171,15 @@ class PaginaAgregarReceta(QMainWindow):
                 continue
 
             try:
-                # Manejar caso especial "al gusto"
                 if partes[0].lower() == 'al' and partes[1].lower() == 'gusto':
                     cantidad = 0
                     unidad_original = 'al gusto'
                     nombre_ing = ' '.join(partes[2:])
                 else:
-                    # Caso normal: cantidad numérica
                     cantidad = float(partes[0])
                     unidad_original = partes[1]
                     nombre_ing = ' '.join(partes[2:])
 
-                # Validar que el nombre del ingrediente no esté vacío
                 if not nombre_ing.strip():
                     print(f"Línea ignorada (nombre de ingrediente vacío): {linea}")
                     continue

@@ -65,8 +65,7 @@ class PaginaLista(QMainWindow):
         self.mostrar_recetas(filtradas)
 
     def abrir_receta(self, item):
-        """Abre la receta seleccionada en pagina_receta"""
-        print(f"🟢 Doble click detectado en: {item.text()}")
+        print(f"Doble click detectado en: {item.text()}")
 
         receta = item.data(Qt.ItemDataRole.UserRole)
         print(f"🔍 Receta obtenida: {receta}")
@@ -114,7 +113,6 @@ class PaginaLista(QMainWindow):
 
     def open_info(self, page_key):
         from message_dialog import MessageDialog
-        # MANTENER EL open_info ORIGINAL
         msg = (
             "Esta es la lista de Recetas.\n\n"
             "Desde aquí puedes aplicar un filtro para ver recetas, o verlas todas. "

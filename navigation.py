@@ -24,16 +24,14 @@ class NavigationManager:
     def mostrar(self, clave_ventana, ventana_class, *args, **kwargs):
         print(f"NavigationManager: navegar a clave='{clave_ventana}', clase={ventana_class.__name__}")
 
-        # 🟡 CERRAR TODAS las ventanas existentes
         for clave, ventana in list(self.ventanas.items()):
             print(f"Cerrando ventana: {clave}")
             ventana.close()
 
-        # 🟡 LIMPIAR el diccionario completamente
+
         self.ventanas.clear()
         self.ventana_actual = None
 
-        # Crear nueva ventana
         print(f"Creando nueva instancia de {ventana_class.__name__}")
         try:
             self.ventanas[clave_ventana] = ventana_class(*args, **kwargs)

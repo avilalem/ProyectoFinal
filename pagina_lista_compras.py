@@ -21,7 +21,6 @@ class PaginaListaCompras(QMainWindow):
         else:
             self.lista_compras = lista_compras
 
-        # Conectar señales
         self.borrarTodo.clicked.connect(self.borrar_lista)
         self.guardarLista.clicked.connect(self.generar_pdf)
         self.selectTodo.clicked.connect(self.marcar_todo)
@@ -30,7 +29,6 @@ class PaginaListaCompras(QMainWindow):
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
 
-        # NUEVO: Botón para actualizar lista
         if hasattr(self, 'botonCambiosLista'):
             self.botonCambiosLista.clicked.connect(self.aplicar_cambios_lista)
 
@@ -38,12 +36,10 @@ class PaginaListaCompras(QMainWindow):
         self.cargar_lista_compras_completa()
 
     def cargar_lista_compras_completa(self):
-        """Carga tanto las recetas como los ingredientes compilados"""
         self.cargar_lista_recetas()
         self.cargar_lista_ingredientes_compilados()
 
     def cargar_lista_recetas(self):
-        """Carga la lista de recetas agregadas con checkboxes"""
         self.listaRecetas.clear()
 
         if not hasattr(self.lista_compras, 'recetas_agregadas') or not self.lista_compras.recetas_agregadas:
@@ -64,7 +60,6 @@ class PaginaListaCompras(QMainWindow):
             self.listaRecetas.addItem(item)
 
     def cargar_lista_ingredientes_compilados(self):
-        """Carga los ingredientes compilados sin duplicados y con unidades convertidas"""
         self.listaCompras.clear()
 
         if self.lista_compras.esta_vacia():
@@ -73,7 +68,6 @@ class PaginaListaCompras(QMainWindow):
             self.listaCompras.addItem(item)
             return
 
-        # Compilar ingredientes de recetas seleccionadas
         ingredientes_compilados = self.compilar_ingredientes()
 
         for nombre, cantidad, unidad in ingredientes_compilados:
@@ -84,10 +78,8 @@ class PaginaListaCompras(QMainWindow):
             self.listaCompras.addItem(item)
 
     def compilar_ingredientes(self):
-        """Compila ingredientes de recetas seleccionadas, suma cantidades y convierte unidades"""
         ingredientes_totales = {}
 
-        # Obtener recetas seleccionadas
         recetas_seleccionadas = []
         for i in range(self.listaRecetas.count()):
             item = self.listaRecetas.item(i)
@@ -114,7 +106,6 @@ class PaginaListaCompras(QMainWindow):
                         'unidad_original': unidad_original
                     }
 
-        # Convertir unidades
         ingredientes_convertidos = []
         for clave, datos in ingredientes_totales.items():
             cantidad_convertida, unidad_convertida = self.convertir_unidad(
@@ -133,7 +124,6 @@ class PaginaListaCompras(QMainWindow):
         """Convierte unidades a formatos más convenientes"""
         unidad = unidad_original.upper()
 
-        # Conversiones de peso
         if unidad in ['GRAMOS', 'G', 'GR']:
             if cantidad >= 453.592:  # 1 libra en gramos
                 return round(cantidad / 453.592, 2), 'lb'
@@ -154,7 +144,6 @@ class PaginaListaCompras(QMainWindow):
             else:
                 return round(cantidad, 2), 'oz'
 
-        # Conversiones de volumen
         elif unidad in ['MILILITROS', 'ML', 'MILILITRO']:
             if cantidad >= 236.588:  # 1 taza en ml
                 return round(cantidad / 236.588, 2), 'tazas'
@@ -173,17 +162,14 @@ class PaginaListaCompras(QMainWindow):
             else:
                 return round(cantidad, 2), 'tazas'
 
-        # Para otras unidades, mantener original
         else:
             return round(cantidad, 2), unidad_original
 
     def aplicar_cambios_lista(self):
-        """Aplica los cambios de selección a la lista de ingredientes"""
         self.cargar_lista_ingredientes_compilados()
         QMessageBox.information(self, "Lista actualizada", "La lista de ingredientes ha sido actualizada")
 
     def marcar_todo(self):
-        """Marca o desmarca todos los ingredientes"""
         if self.listaCompras.count() == 0:
             return
 
@@ -217,8 +203,6 @@ class PaginaListaCompras(QMainWindow):
         QMessageBox.information(self, "Lista borrada", "La lista de compras ha sido borrada correctamente")
 
     def generar_pdf(self):
-        """Genera PDF con recetas e ingredientes seleccionados"""
-        # Obtener recetas seleccionadas
         recetas_seleccionadas = []
         for i in range(self.listaRecetas.count()):
             item = self.listaRecetas.item(i)
@@ -227,7 +211,6 @@ class PaginaListaCompras(QMainWindow):
                 if receta_data:
                     recetas_seleccionadas.append(receta_data)
 
-        # Obtener ingredientes seleccionados
         ingredientes_seleccionados = []
         for i in range(self.listaCompras.count()):
             item = self.listaCompras.item(i)
@@ -241,22 +224,19 @@ class PaginaListaCompras(QMainWindow):
         try:
             from reportlab.pdfgen import canvas
             from reportlab.lib.pagesizes import letter
-            import os  # AGREGAR ESTA IMPORTACIÓN
+            import os
 
-            # GUARDAR EN ESCRITORIO
             desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
             nombre_archivo = os.path.join(desktop_path, "lista_compras_final.pdf")
 
             c = canvas.Canvas(nombre_archivo, pagesize=letter)
             c.setFont("Helvetica-Bold", 14)
 
-            # Título
             c.drawString(100, 750, "LISTA DE COMPRAS FINAL")
             c.line(100, 745, 500, 745)
 
             y_pos = 720
 
-            # Recetas seleccionadas
             if recetas_seleccionadas:
                 c.setFont("Helvetica-Bold", 12)
                 c.drawString(100, y_pos, "RECETAS SELECCIONADAS:")
@@ -276,7 +256,6 @@ class PaginaListaCompras(QMainWindow):
 
                 y_pos -= 10
 
-            # Ingredientes
             if ingredientes_seleccionados:
                 c.setFont("Helvetica-Bold", 12)
                 c.drawString(100, y_pos, "INGREDIENTES:")
@@ -314,7 +293,6 @@ class PaginaListaCompras(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"No se pudo generar el PDF: {str(e)}")
 
-    # ... (los métodos restantes se mantienen igual)
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
