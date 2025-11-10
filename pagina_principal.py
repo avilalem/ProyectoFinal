@@ -19,8 +19,8 @@ class PaginaPrincipal(QMainWindow):
 
     def abrir_usuario(self):
         print("PaginaPrincipal: abrir_usuario llamado")
-        from pagina_busqueda import PaginaBusqueda
-        self.nav.mostrar("busqueda", PaginaBusqueda, self.controlador)
+        from pagina_lista import PaginaLista
+        self.nav.mostrar("lista", PaginaLista, self.controlador)
 
     def abrir_admin(self):
         print("PaginaPrincipal: abrir_admin llamado")
