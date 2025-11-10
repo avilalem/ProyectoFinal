@@ -5,7 +5,6 @@ from PyQt6.QtCore import Qt
 from database import SQLiteDatabase
 from navigation import NavigationManager
 from models import Receta, Ingrediente, ListaCompras
-from message_dialog import MessageDialog
 
 
 class PaginaReceta(QMainWindow):
@@ -24,39 +23,128 @@ class PaginaReceta(QMainWindow):
             self.close()
             return
 
+        # Configurar elementos de la interfaz
         self._configurar_titulo()
         self.listaIngredientes.setPlainText(self.obtener_ingredientes_texto(1.0))
         self.textProcedimiento.setPlainText(self.receta.instrucciones)
         self.lineCantidad.setText("1")
 
-        self.lista_compras = ListaCompras(self.db)
+        # Inicializar lista de compras global (persistente entre ventanas)
+        self.lista_compras_global = self.obtener_lista_compras_global()
 
+        # Conectar señales
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonEditar.clicked.connect(self.abrir_editar)
-        self.botonCarritoCompras.clicked.connect(self.agregar_a_lista_compras)
+        self.botonCarritoCompras.clicked.connect(self.mostrar_opciones_carrito)
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.lineCantidad.textChanged.connect(self.actualizar_ingredientes)
         self.botonRegresar.clicked.connect(self.regresar)
-        self.botonCerrarS.clicked.connect(self.cerrar_sesion)
-
 
         if hasattr(self, 'botonInfo'):
             self.botonInfo.clicked.connect(lambda: self.open_info("receta_general"))
 
         self.actualizar_botones_administrador()
 
-    def cerrar_sesion(self):
-        if self.nav.es_administrador:
-            self.nav.logout_administrador()
-            dlg = MessageDialog(self,
-                                title="Sesión Cerrada",
-                                text="Sesión de administrador cerrada correctamente",
-                                editable=False)
-            dlg.exec()
+    def obtener_lista_compras_global(self):
+        """Obtiene o crea la lista de compras global"""
+        # Usar una variable estática o almacenar en el controlador
+        if hasattr(self.controlador, 'lista_compras_global'):
+            return self.controlador.lista_compras_global
+        else:
+            lista = ListaCompras(self.db)
+            self.controlador.lista_compras_global = lista
+            return lista
 
-            from pagina_principal import PaginaPrincipal
-            self.nav.mostrar("principal", PaginaPrincipal, self.controlador)
+    def mostrar_opciones_carrito(self):
+        """Muestra el diálogo con opciones para el carrito"""
+        from confirm_dialog import ConfirmDialog
 
+        # Crear diálogo personalizado con dos opciones
+        dlg = QMessageBox(self)
+        dlg.setWindowTitle("Agregar a Lista de Compras")
+        dlg.setText(f"¿Cómo deseas agregar '{self.receta.nombre}' a la lista?")
+
+        # Crear botones personalizados
+        btn_agregar = dlg.addButton("Agregar a lista", QMessageBox.ButtonRole.AcceptRole)
+        btn_agregar_ir = dlg.addButton("Agregar e ir al carrito", QMessageBox.ButtonRole.ActionRole)
+        btn_cancelar = dlg.addButton("Cancelar", QMessageBox.ButtonRole.RejectRole)
+
+        dlg.exec()
+
+        clicked_button = dlg.clickedButton()
+
+        if clicked_button == btn_agregar:
+            self.agregar_a_lista_compras(redirigir=False)
+        elif clicked_button == btn_agregar_ir:
+            self.agregar_a_lista_compras(redirigir=True)
+
+    def agregar_a_lista_compras(self, redirigir=False):
+        """Agrega la receta a la lista de compras con el multiplicador actual"""
+        try:
+            factor_text = self.lineCantidad.text().strip()
+            if not factor_text:
+                multiplicador = 1.0
+            else:
+                multiplicador = float(factor_text)
+
+            if multiplicador <= 0:
+                QMessageBox.warning(self, "Error", "El multiplicador debe ser mayor que 0")
+                return
+
+            # Crear una copia temporal de la receta con el multiplicador
+            receta_con_multiplicador = {
+                'receta': self.receta,
+                'multiplicador': multiplicador,
+                'ingredientes_ajustados': []
+            }
+
+            # Calcular ingredientes ajustados
+            for ingrediente, cantidad in self.receta.ingredientes:
+                cantidad_ajustada = cantidad * multiplicador
+                receta_con_multiplicador['ingredientes_ajustados'].append({
+                    'ingrediente': ingrediente,
+                    'cantidad': cantidad_ajustada
+                })
+
+            # Agregar a la lista global
+            if not hasattr(self.lista_compras_global, 'recetas_agregadas'):
+                self.lista_compras_global.recetas_agregadas = []
+
+            # Evitar duplicados
+            receta_existente = False
+            for receta_guardada in self.lista_compras_global.recetas_agregadas:
+                if (receta_guardada['receta'].id == self.receta.id and
+                        receta_guardada['multiplicador'] == multiplicador):
+                    receta_existente = True
+                    break
+
+            if not receta_existente:
+                self.lista_compras_global.recetas_agregadas.append(receta_con_multiplicador)
+
+            # Agregar ingredientes a la lista de compras
+            for ingrediente, cantidad in self.receta.ingredientes:
+                cantidad_ajustada = cantidad * multiplicador
+                self.lista_compras_global._agregar_ingrediente(ingrediente, cantidad_ajustada)
+
+            mensaje = f"✅ '{self.receta.nombre}' agregada a lista de compras (x{multiplicador})"
+
+            if redirigir:
+                mensaje += "\n\nRedirigiendo al carrito..."
+                QMessageBox.information(self, "Agregado", mensaje)
+                self.abrir_lista_compras()
+            else:
+                QMessageBox.information(self, "Agregado", mensaje)
+
+        except ValueError:
+            QMessageBox.warning(self, "Error", "Por favor ingresa un número válido para la cantidad")
+
+    def abrir_lista_compras(self):
+        """Abre la página de lista de compras"""
+        from pagina_lista_compras import PaginaListaCompras
+        ventana_compras = PaginaListaCompras(self.controlador, self.lista_compras_global)
+        self.controlador.mostrar(ventana_compras)
+
+    # ... (el resto de los métodos se mantienen igual)
     def _configurar_titulo(self):
         posibles_labels = ['labelTitulo', 'tituloLabel', 'lblTitulo', 'Titulo']
         for label_name in posibles_labels:
@@ -104,33 +192,6 @@ class PaginaReceta(QMainWindow):
         texto_ingredientes = self.obtener_ingredientes_texto(factor)
         self.listaIngredientes.setPlainText(texto_ingredientes)
 
-    def agregar_a_lista_compras(self):
-        try:
-            factor_text = self.lineCantidad.text().strip()
-            if not factor_text:
-                multiplicador = 1.0
-            else:
-                multiplicador = float(factor_text)
-
-            if multiplicador <= 0:
-                QMessageBox.warning(self, "Error", "El multiplicador debe ser mayor que 0")
-                return
-
-            for ingrediente, cantidad in self.receta.ingredientes:
-                cantidad_ajustada = cantidad * multiplicador
-                self.lista_compras._agregar_ingrediente(ingrediente, cantidad_ajustada)
-
-            QMessageBox.information(
-                self,
-                "Agregado a lista de compras",
-                f"✅ '{self.receta.nombre}' agregada a lista de compras\n"
-                f"Multiplicador: x{multiplicador}\n"
-                f"Total de ingredientes en lista: {len(self.lista_compras.items)}"
-            )
-
-        except ValueError:
-            QMessageBox.warning(self, "Error", "Por favor ingresa un número válido para la cantidad")
-
     def abrir_editar(self):
         if not self.nav.es_administrador:
             QMessageBox.warning(self, "Acceso denegado", "Solo los administradores pueden editar recetas")
@@ -155,7 +216,6 @@ class PaginaReceta(QMainWindow):
         dlg.exec()
 
     def _eliminar_receta(self):
-        """Elimina la receta de la base de datos"""
         try:
             self.db.execute("DELETE FROM recetas WHERE id = ?", (self.receta_id,))
             QMessageBox.information(self, "Eliminado", "Receta eliminada correctamente")
@@ -169,11 +229,9 @@ class PaginaReceta(QMainWindow):
         self.controlador.mostrar(ventana_lista)
 
     def actualizar_botones_administrador(self):
-        """Muestra/oculta botones según el modo administrador"""
         from navigation import NavigationManager
         nav = NavigationManager.get_instance()
         es_admin = nav.es_administrador
-
         botones_admin = ['botonEditar', 'botonEliminar', 'botonCerrarS']
         for boton_name in botones_admin:
             if hasattr(self, boton_name):
