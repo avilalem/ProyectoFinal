@@ -47,7 +47,6 @@ class NavigationManager:
 
     def volver_atras(self):
         if len(self.historial) > 1:
-            # Quita la página actual
             self.historial.pop()
             clave_anterior = self.historial[-1]
             print(f"Volviendo a: {clave_anterior}")
