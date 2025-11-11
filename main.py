@@ -1,5 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication
+from win32comext.shell.demos.explorer_browser import MainWindow
+
 from pagina_principal import PaginaPrincipal
 from navigation import NavigationManager
 
@@ -24,5 +26,4 @@ if __name__ == "__main__":
     nav = NavigationManager.get_instance()
 
     nav.mostrar("principal", PaginaPrincipal, controlador)
-
     sys.exit(app.exec())
