@@ -28,6 +28,8 @@ class PaginaLista(QMainWindow):
         self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
         self.botonRegresar.clicked.connect(self.regresar_a_busqueda)
         self.cajaBusqueda.textChanged.connect(self.buscar_recetas)
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_lista"))
+
 
         self.listaRecetas.itemDoubleClicked.connect(self.abrir_receta)
 
@@ -80,9 +82,9 @@ class PaginaLista(QMainWindow):
                 self.controlador.mostrar(ventana_receta)
                 print("✅ Navegación exitosa")
             except Exception as e:
-                print(f"❌ Error al navegar: {e}")
+                print(f"Error al navegar: {e}")
         else:
-            print("❌ No se pudo obtener la receta o no tiene ID")
+            print("No se pudo obtener la receta o no tiene ID")
 
     def regresar_a_busqueda(self):
         if self.nav.es_administrador:

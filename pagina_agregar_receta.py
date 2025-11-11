@@ -22,10 +22,23 @@ class PaginaAgregarReceta(QMainWindow):
         self.botonEliminar.clicked.connect(self.confirmar_eliminar)
         self.botonRegresar.clicked.connect(self.regresar)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_agregar_receta"))
         categoria = ["DULCE", "SALADO"]
 
         self.comboCategoria.addItems(categoria)
         self.nombreReceta.setFocus()
+
+    def open_info(self, page_key):
+        from message_dialog import MessageDialog
+        msg = (
+            "Aqui puedes agregar recetas.\n\n"
+            "Tienes que seguir el formato especifico: "
+            "Cantidad UnidadMetrica NombreIngrediente"
+            "Por ejemplo: 100 gramos azucar"
+            "Puedes presionar 'Guardar' para guardar la nueva receta o 'Eliminar' para borrar los cambios."
+        )
+        dlg = MessageDialog(self, title="Ayuda - Página Nueva Receta", text=msg, editable=False)
+        dlg.exec()
 
     def cerrar_sesion(self):
         if self.nav.es_administrador:

@@ -23,6 +23,8 @@ class PaginaEditarReceta(QMainWindow):
         self.botonRegresar.clicked.connect(self.volver)
         self.botonSalir.clicked.connect(self.confirmar_salida)
         self.botonCerrarS.clicked.connect(self.cerrar_sesion)
+        self.botonInfo.clicked.connect(lambda: self.open_info("pagina_editar_receta"))
+
 
         if self.receta:
             self.cargar_datos()
@@ -30,6 +32,17 @@ class PaginaEditarReceta(QMainWindow):
             QMessageBox.critical(self, "Error", "Receta no encontrada")
             self.close()
 
+    def open_info(self, page_key):
+        from message_dialog import MessageDialog
+        msg = (
+            "Aqui puedes editar recetas.\n\n"
+            "Aun tienes que seguir el formato especifico: "
+            "Cantidad UnidadMetrica NombreIngrediente"
+            "Por ejemplo: 100 gramos azucar"
+            "Puedes presionar 'Guardar' para guardar la nueva receta o 'Eliminar' para borrar la recetao 'X' para borrar todos los cambios."
+        )
+        dlg = MessageDialog(self, title="Ayuda - Página Nueva Receta", text=msg, editable=False)
+        dlg.exec()
     def confirmar_salida(self):
         from confirm_dialog import ConfirmDialog
         dlg = ConfirmDialog(
